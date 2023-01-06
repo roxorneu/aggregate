@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, ImageBackground, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  ImageBackground,
+  StyleSheet,
+  Image,
+  Pressable,
+} from "react-native";
 
 import colors from "../config/colors";
 import fonts from "../config/fonts";
@@ -12,6 +19,20 @@ function WelcomeScreen(props) {
         <Image style={styles.logo} source={require("../assets/logo.png")} />
         <Text style={styles.logoText}> {strings.appName} </Text>
       </View>
+
+      <Pressable
+        style={styles.loginButton}
+        onPress={() => Alert.alert("Button with adjusted color pressed")}
+      >
+        <Text style={styles.loginText}>{strings.loginButtonText}</Text>
+      </Pressable>
+
+      <Pressable
+        style={styles.registerButton}
+        onPress={() => Alert.alert("Button with adjusted color pressed")}
+      >
+        <Text style={styles.registerText}>{strings.registerButtonText}</Text>
+      </Pressable>
     </ImageBackground>
   );
 }
@@ -20,13 +41,14 @@ const styles = StyleSheet.create({
   background: {
     backgroundColor: colors.primary,
     flex: 1,
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "center",
   },
 
   logoContainer: {
     position: "relative",
     alignSelf: "center",
+    bottom: 0,
   },
 
   logo: {
@@ -38,6 +60,37 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary,
     fontSize: 25,
     alignSelf: "center",
+  },
+
+  loginButton: {
+    backgroundColor: colors.secondary,
+    width: "50%",
+    alignSelf: "center",
+    alignItems: "center",
+    paddingVertical: 12,
+    borderRadius: 25,
+    elevation: 10,
+    marginTop: 150,
+  },
+
+  loginText: {
+    fontFamily: fonts.primary,
+  },
+
+  registerButton: {
+    backgroundColor: colors.secondary,
+    width: "50%",
+    alignSelf: "center",
+    alignItems: "center",
+    paddingVertical: 12,
+    borderRadius: 25,
+    elevation: 10,
+
+    marginTop: 20,
+  },
+
+  registerText: {
+    fontFamily: fonts.primary,
   },
 });
 
