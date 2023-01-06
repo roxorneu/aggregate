@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   Pressable,
+  Alert,
 } from "react-native";
 
 import colors from "../config/colors";
@@ -22,14 +23,14 @@ function WelcomeScreen(props) {
 
       <Pressable
         style={styles.loginButton}
-        onPress={() => Alert.alert("Button with adjusted color pressed")}
+        onPress={() => Alert.alert("Logging In")}
       >
         <Text style={styles.loginText}>{strings.loginButtonText}</Text>
       </Pressable>
 
       <Pressable
         style={styles.registerButton}
-        onPress={() => Alert.alert("Button with adjusted color pressed")}
+        onPress={() => Alert.alert("Registering")}
       >
         <Text style={styles.registerText}>{strings.registerButtonText}</Text>
       </Pressable>
