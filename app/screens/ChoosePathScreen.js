@@ -8,17 +8,30 @@ import {
 import React from "react";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
+import strings from "../config/strings";
 
 import { NavigationContainer } from "@react-navigation/native";
 
 const ChoosePathScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity style={styles.newTripBox} onPress={() => {}}>
-        <Text style={styles.newTripText}>Create New Trip!</Text>
+      <TouchableOpacity
+        style={styles.newTripBox}
+        onPress={() => {
+          navigation.navigate(strings.createNewTripsScreen);
+        }}
+      >
+        <Text style={styles.newTripText}>{strings.createNewTripText}</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.viewAllTrips} onPress={() => {}}>
-        <Text style={styles.viewTripsText}>View All Trips</Text>
+      <TouchableOpacity
+        style={styles.viewAllTrips}
+        onPress={() => {
+          navigation.navigate(strings.exisitingTripsScreen);
+        }}
+      >
+        <Text style={styles.viewTripsText}>
+          {strings.viewExistingTripsText}
+        </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
