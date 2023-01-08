@@ -19,6 +19,12 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
+          name={strings.createNewTripsScreen}
+          component={CreateNewTripsScreen}
+          options={{}}
+        />
+
+        <Stack.Screen
           name={strings.welcomeScreen}
           component={WelcomeScreen}
           options={{ header: () => null }}
@@ -28,12 +34,6 @@ export default function App() {
           name={strings.choosePathScreen}
           component={ChoosePathScreen}
           options={{ header: () => null }}
-        />
-
-        <Stack.Screen
-          name={strings.createNewTripsScreen}
-          component={CreateNewTripsScreen}
-          options={{}}
         />
 
         <Stack.Screen
