@@ -13,7 +13,7 @@ import colors from "../config/colors";
 import fonts from "../config/fonts";
 import strings from "../config/strings";
 
-function WelcomeScreen(props) {
+function WelcomeScreen({ navigation }) {
   return (
     <ImageBackground style={styles.background}>
       <View style={styles.logoContainer}>
@@ -23,14 +23,14 @@ function WelcomeScreen(props) {
 
       <Pressable
         style={styles.loginButton}
-        onPress={() => Alert.alert("Logging In")}
+        onPress={() => navigation.navigate(strings.loginScreen)}
       >
         <Text style={styles.loginText}>{strings.loginButtonText}</Text>
       </Pressable>
 
       <Pressable
         style={styles.registerButton}
-        onPress={() => Alert.alert("Registering")}
+        onPress={() => navigation.navigate(strings.registerScreen)}
       >
         <Text style={styles.registerText}>{strings.registerButtonText}</Text>
       </Pressable>
@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 25,
     elevation: 10,
-
     marginTop: 20,
   },
 

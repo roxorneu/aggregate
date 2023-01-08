@@ -10,8 +10,6 @@ import colors from "../config/colors";
 import fonts from "../config/fonts";
 import strings from "../config/strings";
 
-import { NavigationContainer } from "@react-navigation/native";
-
 const ChoosePathScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>

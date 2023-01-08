@@ -1,6 +1,8 @@
 export default {
   //Screen Names
   welcomeScreen: `Welcome Screen`,
+  registerScreen: `Register Screen`,
+  loginScreen: `Login Screen`,
   choosePathScreen: `Choose Path Screen`,
   createNewTripsScreen: `Create New Trip Screen`,
   exisitingTripsScreen: `Exisiting Trips Screen`,
@@ -10,7 +12,13 @@ export default {
   loginButtonText: `Login!`,
   registerButtonText: `Register`,
 
-  // Choose Path Screen Strings
+  //Register, Login Screen strings
+  nameString: `Name`,
+  phoneString: `Contact`,
+  emailString: `Email`,
+  passwordString: `Password`,
+
+  //Choose Path Screen Strings
   createNewTripText: `Create New Trip!`,
   viewExistingTripsText: `View Current Trips`,
 };

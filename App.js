@@ -11,6 +11,9 @@ import ChoosePathScreen from "./app/screens/ChoosePathScreen";
 import CreateNewTripsScreen from "./app/screens/CreateNewTripScreen";
 import ExistingTripsScreen from "./app/screens/ExistingTripsScreen";
 import strings from "./app/config/strings";
+import RegisterScreen from "./app/screens/RegisterScreen";
+import LoginScreen from "./app/screens/LoginScreen";
+import colors from "./app/config/colors";
 
 const Stack = createStackNavigator();
 
@@ -19,21 +22,49 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name={strings.createNewTripsScreen}
-          component={CreateNewTripsScreen}
-          options={{}}
-        />
-
-        <Stack.Screen
           name={strings.welcomeScreen}
           component={WelcomeScreen}
           options={{ header: () => null }}
         />
 
         <Stack.Screen
+          name={strings.registerScreen}
+          component={RegisterScreen}
+          options={{
+            headerStyle: {
+              backgroundColor: colors.secondary,
+            },
+          }}
+        />
+
+        <Stack.Screen
+          name={strings.loginScreen}
+          component={LoginScreen}
+          options={{
+            headerStyle: {
+              backgroundColor: colors.secondary,
+            },
+          }}
+        />
+
+        <Stack.Screen
+          name={strings.createNewTripsScreen}
+          component={CreateNewTripsScreen}
+          options={{
+            headerStyle: {
+              backgroundColor: colors.secondary,
+            },
+          }}
+        />
+
+        <Stack.Screen
           name={strings.choosePathScreen}
           component={ChoosePathScreen}
-          options={{ header: () => null }}
+          options={{
+            headerStyle: {
+              backgroundColor: colors.secondary,
+            },
+          }}
         />
 
         <Stack.Screen
