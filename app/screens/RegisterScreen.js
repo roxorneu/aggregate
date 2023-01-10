@@ -56,12 +56,14 @@ const RegisterScreen = ({ navigation }) => {
       <TextInput
         style={styles.inputBoxes}
         placeholder={strings.phoneString}
+        keyboardType={Platform.OS === "ios" ? "number-pad" : "numeric"}
         value={contact}
         onChangeText={(text) => setContact(text)}
       />
       <TextInput
         style={styles.inputBoxes}
         placeholder={strings.emailString}
+        keyboardType="email-address"
         value={email}
         onChangeText={(text) => setEmail(text)}
       />

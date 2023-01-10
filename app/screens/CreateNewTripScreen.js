@@ -25,13 +25,26 @@ const CreateNewTripScreen = ({ navigation }) => {
     navigation.navigate(strings.loginScreen);
   }
 
+  const showDatePicker = () => {
+    return (
+      <DateTimePicker
+        value={date}
+        mode="date"
+        is24Hour={true}
+        display="spinner"
+        onChange={onChange}
+      />
+    );
+  };
   return (
     <KeyboardAvoidingView style={styles.container}>
       <Text style={styles.tripTitleStyle}>{user.displayName}'s New Trip</Text>
       <TextInput placeholder="Destination" style={styles.inputBoxes} />
+      <TextInput placeholder="Meetup Point" style={styles.inputBoxes} />
       <TextInput
         placeholder="Departure (ex: 07:30 PM)"
         style={styles.inputBoxes}
+        keyboardType="visible-password"
       />
       <TextInput placeholder="Vehicle" style={styles.inputBoxes} />
       <TextInput

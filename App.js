@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
 
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, LogBox } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -18,6 +18,8 @@ import colors from "./app/config/colors";
 const Stack = createStackNavigator();
 
 export default function App() {
+  LogBox.ignoreAllLogs();
+
   return (
     <NavigationContainer>
       <Stack.Navigator>

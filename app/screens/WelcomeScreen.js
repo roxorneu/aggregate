@@ -6,21 +6,45 @@ import {
   StyleSheet,
   Image,
   Pressable,
-  Alert,
+  Animated,
 } from "react-native";
+
+import { useState } from "react";
 
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 import strings from "../config/strings";
 
 function WelcomeScreen({ navigation }) {
+  const value = useState(new Animated.ValueXY({ x: 300, y: 300 }))[0];
+
+  function animateLogo() {
+    Animated.timing(value, {
+      toValue: { x: 350, y: 350 },
+      duration: 0,
+      useNativeDriver: false,
+    }).start(resetLogo);
+  }
+
+  function resetLogo() {
+    Animated.timing(value, {
+      toValue: { x: 300, y: 300 },
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  }
+
   return (
     <ImageBackground style={styles.background}>
       <View style={styles.logoContainer}>
-        <Image style={styles.logo} source={require("../assets/logo.png")} />
-        <Text style={styles.logoText}> {strings.appName} </Text>
+        <Animated.View style={{ width: value.x, height: value.y }}>
+          <Pressable onPress={animateLogo}>
+            <Image style={styles.logo} source={require("../assets/logo.png")} />
+          </Pressable>
+        </Animated.View>
       </View>
 
+      <Text style={styles.logoText}> {strings.appName} </Text>
       <Pressable
         style={styles.loginButton}
         onPress={() => navigation.navigate(strings.loginScreen)}
@@ -47,19 +71,21 @@ const styles = StyleSheet.create({
   },
 
   logoContainer: {
-    position: "relative",
+    position: "absolute",
     alignSelf: "center",
-    bottom: 0,
+    top: 130,
   },
 
   logo: {
-    width: 200,
-    height: 200,
+    width: "100%",
+    height: "100%",
   },
 
   logoText: {
     fontFamily: fonts.primary,
     fontSize: 25,
+
+    marginTop: 300,
     alignSelf: "center",
   },
 
@@ -71,7 +97,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 25,
     elevation: 10,
-    marginTop: 150,
+    marginTop: 30,
   },
 
   loginText: {

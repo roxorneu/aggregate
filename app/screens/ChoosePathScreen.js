@@ -22,7 +22,7 @@ const ChoosePathScreen = ({ navigation }) => {
         <Text style={styles.newTripText}>{strings.createNewTripText}</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.viewAllTrips}
+        style={styles.newTripBox}
         onPress={() => {
           navigation.navigate(strings.exisitingTripsScreen);
         }}
@@ -45,9 +45,9 @@ const styles = StyleSheet.create({
   },
 
   newTripBox: {
-    marginTop: 50,
+    marginTop: 25,
     flex: 0.5,
-    margin: 10,
+    margin: 15,
     backgroundColor: colors.secondary,
     justifyContent: "center",
     alignItems: "center",

@@ -48,6 +48,7 @@ const LoginScreen = ({ navigation }) => {
       <TextInput
         style={styles.inputBoxes}
         placeholder={strings.emailString}
+        keyboardType="visible-password"
         value={email}
         onChangeText={(text) => setEmail(text)}
       />
