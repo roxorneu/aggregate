@@ -8,14 +8,12 @@ import dayjs from "dayjs";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 
-export default function DateAndTimePicker() {
+export default function DateAndTimePicker(props) {
+  const { date, setDate, time, setTime } = props;
+
   const [datePicker, setDatePicker] = useState(false);
 
-  const [date, setDate] = useState(new Date());
-
   const [timePicker, setTimePicker] = useState(false);
-
-  const [time, setTime] = useState(new Date(Date.now()));
 
   function showDatePicker() {
     setDatePicker(true);
