@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-community/datetimepicker": "^6.7.1",
     "@react-navigation/stack": "^6.3.10",
     "expo": "~47.0.9",
     "expo-status-bar": "~1.4.2",

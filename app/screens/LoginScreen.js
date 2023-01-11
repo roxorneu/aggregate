@@ -36,7 +36,7 @@ const LoginScreen = ({ navigation }) => {
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log("Logged in " + user.email);
-        console.log(user.toJSON());
+        //console.log(user.toJSON());
 
         navigation.replace(strings.choosePathScreen);
       })

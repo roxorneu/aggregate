@@ -1,3 +1,4 @@
+import React from "react";
 import {
   ImageBackground,
   KeyboardAvoidingView,
@@ -5,9 +6,10 @@ import {
   Text,
   TextInput,
 } from "react-native";
-import React from "react";
 
 import { getAuth, onAuthStateChanged } from "../../firebase";
+
+import DateAndTimePicker from "../components/DateAndTimePicker";
 
 import colors from "../config/colors";
 import fonts from "../config/fonts";
@@ -25,28 +27,18 @@ const CreateNewTripScreen = ({ navigation }) => {
     navigation.navigate(strings.loginScreen);
   }
 
-  const showDatePicker = () => {
-    return (
-      <DateTimePicker
-        value={date}
-        mode="date"
-        is24Hour={true}
-        display="spinner"
-        onChange={onChange}
-      />
-    );
-  };
   return (
     <KeyboardAvoidingView style={styles.container}>
       <Text style={styles.tripTitleStyle}>{user.displayName}'s New Trip</Text>
-      <TextInput placeholder="Destination" style={styles.inputBoxes} />
+
+      <TextInput placeholder="Going To" style={styles.inputBoxes} />
+
+      <DateAndTimePicker />
+
       <TextInput placeholder="Meetup Point" style={styles.inputBoxes} />
-      <TextInput
-        placeholder="Departure (ex: 07:30 PM)"
-        style={styles.inputBoxes}
-        keyboardType="visible-password"
-      />
+
       <TextInput placeholder="Vehicle" style={styles.inputBoxes} />
+
       <TextInput
         placeholder="Number of Co-Passengers"
         style={styles.inputBoxes}
@@ -83,6 +75,7 @@ const styles = StyleSheet.create({
     elevation: 10,
     marginTop: 20,
     fontFamily: fonts.primary,
+    fontSize: 15,
   },
 
   tripTitleStyle: {
