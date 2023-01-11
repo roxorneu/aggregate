@@ -104,8 +104,6 @@ const CreateNewTripScreen = ({ navigation }) => {
         console.log("Document written with ID: ", docRef.id);
         setDestination("");
         setMeetupPoint("");
-        setDate(new Date());
-        setTime(new Date(Date.now()));
         setVehicle("");
         setCoTravellers(0);
         setOtherInfo("");
@@ -159,13 +157,13 @@ const CreateNewTripScreen = ({ navigation }) => {
         style={styles.inputBoxes}
         value={otherInfo}
         onChangeText={(text) => setOtherInfo(text)}
-        numberOfLines={4}
+        numberOfLines={2}
         multiline={true}
       />
 
       <Pressable>
         <TouchableOpacity onPress={handleSubmitTrip}>
-          <Text style={styles.submitButton}> Add Trip! </Text>
+          <Text style={styles.submitButton}> Submit! </Text>
         </TouchableOpacity>
       </Pressable>
     </KeyboardAvoidingView>
@@ -205,13 +203,14 @@ const styles = StyleSheet.create({
 
   submitButton: {
     backgroundColor: colors.secondary,
+    color: colors.black,
     alignSelf: "center",
-    padding: 8,
+    padding: 14,
     paddingLeft: 15,
     borderRadius: 15,
-    elevation: 10,
+    elevation: 5,
     marginTop: 20,
     fontFamily: fonts.primary,
-    fontSize: 25,
+    fontSize: 20,
   },
 });
