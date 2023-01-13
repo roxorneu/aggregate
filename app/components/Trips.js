@@ -1,6 +1,15 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+
 import { useState } from "react";
 import React from "react";
+
+import { MaterialIcons } from "@expo/vector-icons";
 
 import colors from "../config/colors";
 import fonts from "../config/fonts";
@@ -26,10 +35,19 @@ const Trips = (props) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <Pressable
+    <TouchableOpacity
       style={styles.container}
+      activeOpacity={0.95}
       onPress={() => setIsExpanded(!isExpanded)}
     >
+      <View style={styles.arrowIcon}>
+        {isExpanded ? (
+          <MaterialIcons name="keyboard-arrow-up" size={24} color="black" />
+        ) : (
+          <MaterialIcons name="keyboard-arrow-down" size={24} color="black" />
+        )}
+      </View>
+
       <View style={styles.infoBoxes}>
         <Text>Going To: </Text>
         <Text style={styles.propStyle}>{props.destination}</Text>
@@ -63,7 +81,7 @@ const Trips = (props) => {
           </View>
         </View>
       )}
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
@@ -72,20 +90,27 @@ export default Trips;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.secondary,
-    width: "90%",
+    width: "45%",
     justifyContent: "center",
     //alignItems: "center",
     borderRadius: 15,
     elevation: 2,
     marginTop: 10,
     marginBottom: 10,
+    marginRight: 15,
     padding: 5,
+  },
+
+  arrowIcon: {
+    position: "absolute",
+    alignSelf: "flex-end",
+    top: 8,
+    right: 4,
   },
 
   infoBoxes: {
     backgroundColor: colors.secondary,
-    width: "90%",
-    flex: 1,
+    width: "80%",
     flexDirection: "row",
     padding: 3,
     paddingLeft: 10,
@@ -93,6 +118,8 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 3,
     fontFamily: fonts.primary,
+    flexWrap: "wrap",
+    flexGrow: 1,
   },
   propStyle: {
     //textDecorationLine: "underline",

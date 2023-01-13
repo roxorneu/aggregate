@@ -55,6 +55,7 @@ const ViewTripsScreen = () => {
       {tripsList.length > 0 ? (
         <FlatList
           style={styles.listStyle}
+          numColumns={2}
           data={tripsList}
           renderItem={({ item }) => (
             <Trips
@@ -92,5 +93,6 @@ const styles = StyleSheet.create({
   },
   listStyle: {
     margin: 0,
+    padding: 0,
   },
 });
