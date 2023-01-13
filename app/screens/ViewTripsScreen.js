@@ -1,7 +1,7 @@
 import {
   ActivityIndicator,
   FlatList,
-  ImageBackground,
+  RefreshControl,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -17,6 +17,7 @@ import colors from "../config/colors";
 import Trips from "../components/Trips";
 
 const ViewTripsScreen = () => {
+  const [refreshing, setRefreshing] = useState(false);
   const [tripsList, setTripsList] = useState([]);
 
   const getTrips = async () => {
@@ -49,6 +50,7 @@ const ViewTripsScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      {refreshing ? <ActivityIndicator /> : null}
       {tripsList.length > 0 ? (
         <FlatList
           style={styles.listStyle}
@@ -65,6 +67,9 @@ const ViewTripsScreen = () => {
             />
           )}
           keyExtractor={(item) => item.id}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={getTrips} />
+          }
         ></FlatList>
       ) : (
         <ActivityIndicator />
