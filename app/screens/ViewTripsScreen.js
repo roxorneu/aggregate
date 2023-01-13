@@ -24,24 +24,25 @@ const ViewTripsScreen = () => {
     const querySnapshot = await getDocs(collection(db, "trips"));
     const tempList = [];
     querySnapshot.forEach((doc) => {
-      console.log(doc.id, doc.data());
+      //console.log(doc.id, doc.data());
       const document = doc.data();
-      tempList.push({
-        id: doc.id,
-        userID: document.userID,
-        userName: document.userName,
-        destination: document.destination,
-        meetupPoint: document.meetupPoint,
-        meetupTime: document.dateTime_HR,
-        meetupTime_epoch: document.dateTime,
-        coTravellers: document.coTravellers,
-        vehicle: document.vehicle,
-        otherInfo: document.otherInfo,
-      });
+      if (document.dateTime > new Date().getTime()) {
+        tempList.push({
+          id: doc.id,
+          userID: document.userID,
+          userName: document.userName,
+          destination: document.destination,
+          meetupPoint: document.meetupPoint,
+          meetupTime: document.dateTime_HR,
+          meetupTime_epoch: document.dateTime,
+          coTravellers: document.coTravellers,
+          vehicle: document.vehicle,
+          otherInfo: document.otherInfo,
+        });
+      }
     });
     tempList.sort((a, b) => b.meetupTime_epoch - a.meetupTime_epoch);
     setTripsList(tempList);
-    console.log(tripsList);
   };
 
   useEffect(() => {

@@ -94,13 +94,13 @@ const CreateNewTripScreen = ({ navigation }) => {
         const docRef = await addDoc(collection(db, "trips"), {
           userName: user.displayName,
           userID: user.uid,
-          destination: destination,
+          destination: destination.trim(),
           dateTime_HR: tripDateTime,
           dateTime: epochTime.valueOf(),
-          meetupPoint: meetupPoint,
-          vehicle: vehicle,
-          coTravellers: coTravellers,
-          otherInfo: otherInfo,
+          meetupPoint: meetupPoint.trim(),
+          vehicle: vehicle.trim(),
+          coTravellers: coTravellers.trim(),
+          otherInfo: otherInfo.trim(),
         });
         console.log("Document written with ID: ", docRef.id);
         setDestination("");
@@ -151,7 +151,7 @@ const CreateNewTripScreen = ({ navigation }) => {
         placeholder="Number of Co-Travellers"
         style={styles.inputBoxes}
         value={coTravellers}
-        onChangeText={(text) => setCoTravellers(text)}
+        onChangeText={(text) => setCoTravellers(text.trim())}
         keyboardType={Platform.OS === "ios" ? "number-pad" : "numeric"}
       />
       <TextInput

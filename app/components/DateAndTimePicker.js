@@ -47,6 +47,8 @@ export default function DateAndTimePicker(props) {
               mode={"date"}
               display={Platform.OS === "ios" ? "spinner" : "default"}
               is24Hour={true}
+              minimumDate={new Date()}
+              maximumDate={new Date(Date.now() + 15 * 86400000)}
               onChange={onDateSelected}
             />
           )}

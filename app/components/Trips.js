@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
 import React from "react";
 
 import colors from "../config/colors";
@@ -22,12 +23,13 @@ const Trips = (props) => {
 
   const displayTime = date + " " + time;
 
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
-    <View style={styles.container}>
-      <View style={styles.infoBoxes}>
-        <Text>Trip Host: </Text>
-        <Text style={styles.propStyle}>{props.userName}</Text>
-      </View>
+    <Pressable
+      style={styles.container}
+      onPress={() => setIsExpanded(!isExpanded)}
+    >
       <View style={styles.infoBoxes}>
         <Text>Going To: </Text>
         <Text style={styles.propStyle}>{props.destination}</Text>
@@ -36,23 +38,32 @@ const Trips = (props) => {
         <Text>Meetup Time: </Text>
         <Text style={styles.propStyle}>{displayTime}</Text>
       </View>
-      <View style={styles.infoBoxes}>
-        <Text>Meetup Point: </Text>
-        <Text style={styles.propStyle}>{props.meetupPoint}</Text>
-      </View>
-      <View style={styles.infoBoxes}>
-        <Text>Number of Co-Travellers: </Text>
-        <Text style={styles.propStyle}>{props.coTravellers}</Text>
-      </View>
-      <View style={styles.infoBoxes}>
-        <Text>Vehicle: </Text>
-        <Text style={styles.propStyle}>{props.vehicle}</Text>
-      </View>
-      <View style={styles.infoBoxes}>
-        <Text>Other Info: </Text>
-        <Text style={styles.propStyle}>{props.otherInfo}</Text>
-      </View>
-    </View>
+
+      {isExpanded && (
+        <View>
+          <View style={styles.infoBoxes}>
+            <Text>Trip Host: </Text>
+            <Text style={styles.propStyle}>{props.userName}</Text>
+          </View>
+          <View style={styles.infoBoxes}>
+            <Text>Meetup Point: </Text>
+            <Text style={styles.propStyle}>{props.meetupPoint}</Text>
+          </View>
+          <View style={styles.infoBoxes}>
+            <Text>Number of Co-Travellers: </Text>
+            <Text style={styles.propStyle}>{props.coTravellers}</Text>
+          </View>
+          <View style={styles.infoBoxes}>
+            <Text>Vehicle: </Text>
+            <Text style={styles.propStyle}>{props.vehicle}</Text>
+          </View>
+          <View style={styles.infoBoxes}>
+            <Text>Other Info: </Text>
+            <Text style={styles.propStyle}>{props.otherInfo}</Text>
+          </View>
+        </View>
+      )}
+    </Pressable>
   );
 };
 
@@ -84,7 +95,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary,
   },
   propStyle: {
-    textDecorationLine: "underline",
+    //textDecorationLine: "underline",
     fontWeight: "500",
   },
 });
