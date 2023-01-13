@@ -9,7 +9,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import ChoosePathScreen from "./app/screens/ChoosePathScreen";
 import CreateNewTripsScreen from "./app/screens/CreateNewTripScreen";
-import ExistingTripsScreen from "./app/screens/ExistingTripsScreen";
+import ViewTripsScreen from "./app/screens/ViewTripsScreen";
 import strings from "./app/config/strings";
 import RegisterScreen from "./app/screens/RegisterScreen";
 import LoginScreen from "./app/screens/LoginScreen";
@@ -70,9 +70,13 @@ export default function App() {
         />
 
         <Stack.Screen
-          name={strings.exisitingTripsScreen}
-          component={ExistingTripsScreen}
-          options={{}}
+          name={strings.viewTripsScreen}
+          component={ViewTripsScreen}
+          options={{
+            headerStyle: {
+              backgroundColor: colors.secondary,
+            },
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -5,7 +5,7 @@ export default {
   loginScreen: `Login Screen`,
   choosePathScreen: `Choose Path Screen`,
   createNewTripsScreen: `Create New Trip Screen`,
-  exisitingTripsScreen: `Exisiting Trips Screen`,
+  viewTripsScreen: `View Trips Screen`,
 
   //Welcome Screen strings
   appName: `Aggregate!`,

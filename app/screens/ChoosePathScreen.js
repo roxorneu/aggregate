@@ -24,7 +24,7 @@ const ChoosePathScreen = ({ navigation }) => {
       <TouchableOpacity
         style={styles.newTripBox}
         onPress={() => {
-          navigation.navigate(strings.exisitingTripsScreen);
+          navigation.navigate(strings.viewTripsScreen);
         }}
       >
         <Text style={styles.viewTripsText}>

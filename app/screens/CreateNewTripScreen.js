@@ -92,6 +92,7 @@ const CreateNewTripScreen = ({ navigation }) => {
       //console.log(destination);
       try {
         const docRef = await addDoc(collection(db, "trips"), {
+          userName: user.displayName,
           userID: user.uid,
           destination: destination,
           dateTime_HR: tripDateTime,
@@ -107,6 +108,7 @@ const CreateNewTripScreen = ({ navigation }) => {
         setVehicle("");
         setCoTravellers(0);
         setOtherInfo("");
+        navigation.navigate(strings.viewTripsScreen);
       } catch (e) {
         console.error("Error adding document: ", e);
       }
