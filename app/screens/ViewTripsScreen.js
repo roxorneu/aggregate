@@ -32,11 +32,13 @@ const ViewTripsScreen = () => {
         destination: document.destination,
         meetupPoint: document.meetupPoint,
         meetupTime: document.dateTime_HR,
+        meetupTime_epoch: document.dateTime,
         coTravellers: document.coTravellers,
         vehicle: document.vehicle,
         otherInfo: document.otherInfo,
       });
     });
+    tempList.sort((a, b) => b.meetupTime_epoch - a.meetupTime_epoch);
     setTripsList(tempList);
     console.log(tripsList);
   };
