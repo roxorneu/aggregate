@@ -49,13 +49,26 @@ const Trips = (props) => {
       onPress={() => setIsExpanded(!isExpanded)}
     >
       <Modal
-        visible={isExpanded}
-        transparent={true}
-        animationType="slide"
+        isVisible={isExpanded}
         onBackdropPress={closeModal}
+        onBackButtonPress={closeModal}
+        backdropOpacity={0.5}
+        onSwipeComplete={closeModal}
+        useNativeDriverForBackdrop
+        swipeDirection={["down", "up", "right", "left"]}
       >
-        <ViewTripModal />
+        <ViewTripModal
+          userName={props.userName}
+          destination={props.destination}
+          meetupPoint={props.meetupPoint}
+          meetupTime={displayTime}
+          coTravellers={props.coTravellers}
+          vehicle={props.vehicle}
+          otherInfo={props.otherInfo}
+          closeModal={closeModal}
+        />
       </Modal>
+
       <View style={styles.arrowIcon}>
         {isExpanded ? (
           <MaterialIcons name="keyboard-arrow-up" size={24} color="black" />
@@ -70,33 +83,8 @@ const Trips = (props) => {
       </View>
       <View style={styles.infoBoxes}>
         <Text>Meetup Time: </Text>
-        <Text style={styles.propStyle}>{displayTime}</Text>
+        <Text style={{ fontWeight: "500" }}>{displayTime}</Text>
       </View>
-
-      {isExpanded && (
-        <View>
-          <View style={styles.infoBoxes}>
-            <Text>Trip Host: </Text>
-            <Text style={styles.propStyle}>{props.userName}</Text>
-          </View>
-          <View style={styles.infoBoxes}>
-            <Text>Meetup Point: </Text>
-            <Text style={styles.propStyle}>{props.meetupPoint}</Text>
-          </View>
-          <View style={styles.infoBoxes}>
-            <Text>Number of Co-Travellers: </Text>
-            <Text style={styles.propStyle}>{props.coTravellers}</Text>
-          </View>
-          <View style={styles.infoBoxes}>
-            <Text>Vehicle: </Text>
-            <Text style={styles.propStyle}>{props.vehicle}</Text>
-          </View>
-          <View style={styles.infoBoxes}>
-            <Text>Other Info: </Text>
-            <Text style={styles.propStyle}>{props.otherInfo}</Text>
-          </View>
-        </View>
-      )}
     </TouchableOpacity>
   );
 };
@@ -140,5 +128,6 @@ const styles = StyleSheet.create({
   propStyle: {
     //textDecorationLine: "underline",
     fontWeight: "500",
+    textTransform: "capitalize",
   },
 });

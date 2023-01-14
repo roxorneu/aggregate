@@ -94,13 +94,13 @@ const CreateNewTripScreen = ({ navigation }) => {
         const docRef = await addDoc(collection(db, "trips"), {
           userName: user.displayName,
           userID: user.uid,
-          destination: destination.trim(),
+          destination: destination.trim().toLowerCase(),
           dateTime_HR: tripDateTime,
           dateTime: epochTime.valueOf(),
-          meetupPoint: meetupPoint.trim(),
-          vehicle: vehicle.trim(),
-          coTravellers: coTravellers.trim(),
-          otherInfo: otherInfo.trim(),
+          meetupPoint: meetupPoint.trim().toLowerCase(),
+          vehicle: vehicle.trim().toLowerCase(),
+          coTravellers: coTravellers.trim().toLowerCase(),
+          otherInfo: otherInfo.trim().toLowerCase(),
         });
         console.log("Document written with ID: ", docRef.id);
         setDestination("");

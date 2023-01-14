@@ -21,6 +21,7 @@ const ViewTripsScreen = () => {
   const [tripsList, setTripsList] = useState([]);
 
   const getTrips = async () => {
+    //Single query with for all data chosen over multiple queries within modal etc.
     const querySnapshot = await getDocs(collection(db, "trips"));
     const tempList = [];
     querySnapshot.forEach((doc) => {

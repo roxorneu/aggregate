@@ -1,20 +1,33 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
+
+import { MaterialIcons } from "@expo/vector-icons";
 
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 
 const ViewTripModal = (props) => {
+  const closeModal = () => {
+    props.closeModal();
+  };
+
   return (
     <View style={styles.container}>
-      <Text>ViewTripModal</Text>
+      <View style={styles.arrowIcon}>
+        <Pressable
+          onPress={closeModal}
+          style={{ paddingRight: 10, paddingBottom: 4, paddingTop: 10 }}
+        >
+          <MaterialIcons name="keyboard-arrow-up" size={24} color="black" />
+        </Pressable>
+      </View>
       <View style={styles.infoBoxes}>
         <Text>Going To: </Text>
         <Text style={styles.propStyle}>{props.destination}</Text>
       </View>
       <View style={styles.infoBoxes}>
         <Text>Meetup Time: </Text>
-        <Text style={styles.propStyle}>{props.displayTime}</Text>
+        <Text style={{ fontWeight: "900" }}>{props.meetupTime}</Text>
       </View>
 
       <View style={styles.infoBoxes}>
@@ -35,7 +48,7 @@ const ViewTripModal = (props) => {
       </View>
       <View style={styles.infoBoxes}>
         <Text>Other Info: </Text>
-        <Text style={styles.propStyle}>{props.otherInfo}</Text>
+        <Text style={{ fontWeight: "500" }}>{props.otherInfo}</Text>
       </View>
     </View>
   );
@@ -45,31 +58,39 @@ export default ViewTripModal;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.primary,
-    width: "90%",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: colors.secondary,
+    width: "92%",
+    alignSelf: "center",
     borderRadius: 15,
-    elevation: 2,
-    margin: 15,
-    marginLeft: 20,
-    padding: 5,
+    elevation: 10,
+    marginLeft: 10,
+    padding: 10,
+    borderColor: colors.primary,
+    borderWidth: 5,
+    //borderStyle: "dotted",
   },
+
+  arrowIcon: {
+    position: "absolute",
+    alignSelf: "flex-end",
+    bottom: 8,
+    right: 4,
+  },
+
   infoBoxes: {
     backgroundColor: colors.secondary,
-    width: "80%",
+    width: "92%",
     flexDirection: "row",
-    padding: 3,
+    padding: 8,
     paddingLeft: 10,
     borderRadius: 15,
     marginTop: 5,
     marginBottom: 3,
     fontFamily: fonts.primary,
-    flexWrap: "wrap",
-    flexShrink: 1,
   },
   propStyle: {
     //textDecorationLine: "underline",
-    fontWeight: "500",
+    fontWeight: "900",
+    textTransform: "capitalize",
   },
 });
