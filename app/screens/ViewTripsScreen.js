@@ -52,6 +52,7 @@ const ViewTripsScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       {refreshing ? <ActivityIndicator /> : null}
+
       {tripsList.length > 0 ? (
         <FlatList
           style={styles.listStyle}

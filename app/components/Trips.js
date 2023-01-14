@@ -6,6 +6,8 @@ import {
   View,
 } from "react-native";
 
+import Modal from "react-native-modal";
+
 import { useState } from "react";
 import React from "react";
 
@@ -14,6 +16,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 import strings from "../config/strings";
+
+import ViewTripModal from "../components/ViewTripModal";
 
 const Trips = (props) => {
   const meetupTime = props.meetupTime.split(" ");
@@ -34,12 +38,24 @@ const Trips = (props) => {
 
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const closeModal = () => {
+    setIsExpanded(false);
+  };
+
   return (
     <TouchableOpacity
       style={styles.container}
       activeOpacity={0.95}
       onPress={() => setIsExpanded(!isExpanded)}
     >
+      <Modal
+        visible={isExpanded}
+        transparent={true}
+        animationType="slide"
+        onBackdropPress={closeModal}
+      >
+        <ViewTripModal />
+      </Modal>
       <View style={styles.arrowIcon}>
         {isExpanded ? (
           <MaterialIcons name="keyboard-arrow-up" size={24} color="black" />
