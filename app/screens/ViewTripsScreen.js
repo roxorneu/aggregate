@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
-  Touchable,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -35,7 +35,13 @@ const ViewTripsScreen = () => {
 
   const getTrips = async () => {
     //Single query with for all data chosen over multiple queries within modal etc.
-    const querySnapshot = await getDocs(collection(db, "trips"));
+
+    const q = query(
+      collection(db, "trips"),
+      where("dateTime", ">=", new Date().getTime())
+    );
+
+    const querySnapshot = await getDocs(q);
     const tempList = [];
     QueryToDocList(querySnapshot, tempList);
     tempList.sort((a, b) => b.meetupTime_epoch - a.meetupTime_epoch);
@@ -55,23 +61,57 @@ const ViewTripsScreen = () => {
   const [toTime, setToTime] = useState(new Date(Date.now()));
 
   const handleDestinationFiltering = async () => {
+    if (tripDestination.trim() === "") {
+      setFilterDestination(false);
+      return;
+    }
     //console.log(tripDestination);
     setFilterDestination(false);
 
     const q = query(
       collection(db, "trips"),
-      where("destination", "==", tripDestination.toLower().trim())
+      where("destination", "==", tripDestination.toLowerCase().trim())
     );
     const querySnapshot = await getDocs(q);
     const tempList = [];
     QueryToDocList(querySnapshot, tempList);
+
+    if (tempList.length === 0) {
+      ToastAndroid.show(
+        "No matching trips found,\n     Showing all trips",
+        2000
+      );
+      setTripDestination("");
+      return;
+    }
     setTripsList(tempList);
     setTripDestination("");
+    ToastAndroid.show("Pull down to reset filter", 1000);
   };
 
-  const handleTimeFiltering = () => {
-    console.log(fromDate, fromTime);
-    console.log(DateTimeFormatter(toDate, toTime));
+  const handleTimeFiltering = async () => {
+    //console.log(DateTimeFormatter(fromDate, fromTime).valueOf());
+    //console.log(DateTimeFormatter(toDate, toTime).valueOf());
+
+    setFilterTime(false);
+    const q = query(
+      collection(db, "trips"),
+      where("dateTime", ">=", DateTimeFormatter(fromDate, fromTime).valueOf()),
+      where("dateTime", "<=", DateTimeFormatter(toDate, toTime).valueOf())
+    );
+    const querySnapshot = await getDocs(q);
+    const tempList = [];
+    QueryToDocList(querySnapshot, tempList);
+
+    if (tempList.length === 0) {
+      ToastAndroid.show(
+        "No matching trips found,\n     Showing all trips",
+        2000
+      );
+      return;
+    }
+    setTripsList(tempList);
+    ToastAndroid.show("Pull down to reset filter", 1000);
   };
 
   return (
@@ -162,7 +202,11 @@ const ViewTripsScreen = () => {
           )}
           keyExtractor={(item) => item.id}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={getTrips} />
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={getTrips}
+              title="Reset Filters"
+            />
           }
         ></FlatList>
       ) : (
@@ -178,7 +222,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.primary,
     flex: 1,
-    justifyContent: "center",
+    //justifyContent: "center",
     alignItems: "stretch",
     paddingTop: 0,
     paddingLeft: 0,
@@ -193,6 +237,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     flexDirection: "row",
     alignContent: "space-around",
+    alignSelf: "flex-start",
   },
 
   filterText: {
