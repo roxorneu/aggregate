@@ -1,47 +1,43 @@
 import {
   ActivityIndicator,
   FlatList,
+  Pressable,
   RefreshControl,
   SafeAreaView,
   StyleSheet,
   Text,
+  Touchable,
+  TouchableOpacity,
   View,
 } from "react-native";
 import React from "react";
 
 import { useEffect, useState } from "react";
 
-import { db, collection, getDocs } from "../../firebase";
+import Modal from "react-native-modal";
+
+import { db, collection, getDocs, query, where } from "../../firebase";
 
 import colors from "../config/colors";
+import fonts from "../config/fonts";
 import Trips from "../components/Trips";
+import { TextInput } from "react-native-gesture-handler";
+import DateAndTimePicker from "../components/DateAndTimePicker";
+import DateTimeFormatter from "../utils/DateTimeFormatter";
+import QueryToDocList from "../utils/QueryToDocList";
 
 const ViewTripsScreen = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [tripsList, setTripsList] = useState([]);
 
+  const [filterDestination, setFilterDestination] = useState(false);
+  const [filterTime, setFilterTime] = useState(false);
+
   const getTrips = async () => {
     //Single query with for all data chosen over multiple queries within modal etc.
     const querySnapshot = await getDocs(collection(db, "trips"));
     const tempList = [];
-    querySnapshot.forEach((doc) => {
-      //console.log(doc.id, doc.data());
-      const document = doc.data();
-      if (document.dateTime > new Date().getTime()) {
-        tempList.push({
-          id: doc.id,
-          userID: document.userID,
-          userName: document.userName,
-          destination: document.destination,
-          meetupPoint: document.meetupPoint,
-          meetupTime: document.dateTime_HR,
-          meetupTime_epoch: document.dateTime,
-          coTravellers: document.coTravellers,
-          vehicle: document.vehicle,
-          otherInfo: document.otherInfo,
-        });
-      }
-    });
+    QueryToDocList(querySnapshot, tempList);
     tempList.sort((a, b) => b.meetupTime_epoch - a.meetupTime_epoch);
     setTripsList(tempList);
   };
@@ -50,9 +46,103 @@ const ViewTripsScreen = () => {
     getTrips();
   }, []);
 
+  const [tripDestination, setTripDestination] = useState("");
+
+  const [fromDate, setFromDate] = useState(new Date());
+  const [fromTime, setFromTime] = useState(new Date(Date.now()));
+
+  const [toDate, setToDate] = useState(new Date());
+  const [toTime, setToTime] = useState(new Date(Date.now()));
+
+  const handleDestinationFiltering = async () => {
+    //console.log(tripDestination);
+    setFilterDestination(false);
+
+    const q = query(
+      collection(db, "trips"),
+      where("destination", "==", tripDestination.toLower().trim())
+    );
+    const querySnapshot = await getDocs(q);
+    const tempList = [];
+    QueryToDocList(querySnapshot, tempList);
+    setTripsList(tempList);
+    setTripDestination("");
+  };
+
+  const handleTimeFiltering = () => {
+    console.log(fromDate, fromTime);
+    console.log(DateTimeFormatter(toDate, toTime));
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       {refreshing ? <ActivityIndicator /> : null}
+
+      <View style={styles.tripFiltersContainer}>
+        <Text style={styles.filterText}> Search By </Text>
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => setFilterDestination(true)}
+        >
+          <Text> Destination </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => setFilterTime(true)}
+        >
+          <Text> Meetup Time </Text>
+        </TouchableOpacity>
+      </View>
+
+      <Modal
+        isVisible={filterDestination}
+        onBackdropPress={() => setFilterDestination(false)}
+        onBackButtonPress={() => setFilterDestination(false)}
+        backdropOpacity={0.5}
+      >
+        <View style={styles.modalFilterBox}>
+          <TextInput
+            style={styles.modalDestinationInput}
+            placeholder="Where do you want to go?"
+            value={tripDestination}
+            onChangeText={(text) => setTripDestination(text)}
+          />
+
+          <Pressable onPress={handleDestinationFiltering}>
+            <Text style={styles.modalSubmitButton}> Filter! </Text>
+          </Pressable>
+        </View>
+      </Modal>
+
+      <Modal
+        isVisible={filterTime}
+        onBackdropPress={() => setFilterTime(false)}
+        onBackButtonPress={() => setFilterTime(false)}
+        backdropOpacity={0.5}
+      >
+        <View style={styles.modalFilterBox}>
+          <Text style={styles.modalTimeFilterText}>Please set a range</Text>
+
+          <DateAndTimePicker
+            date={fromDate}
+            setDate={setFromDate}
+            time={fromTime}
+            setTime={setFromTime}
+            title="From"
+          />
+
+          <DateAndTimePicker
+            date={toDate}
+            setDate={setToDate}
+            time={toTime}
+            setTime={setToTime}
+            title="To"
+          />
+          <Pressable onPress={handleTimeFiltering}>
+            <Text style={styles.modalSubmitButton}>Filter!</Text>
+          </Pressable>
+        </View>
+      </Modal>
 
       {tripsList.length > 0 ? (
         <FlatList
@@ -91,10 +181,89 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "stretch",
     paddingTop: 0,
-    paddingLeft: 30,
+    paddingLeft: 0,
   },
+
+  tripFiltersContainer: {
+    width: "100%",
+    height: 50,
+    backgroundColor: colors.secondary,
+    borderColor: colors.black,
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    flexDirection: "row",
+    alignContent: "space-around",
+  },
+
+  filterText: {
+    alignSelf: "center",
+    flex: 0.3,
+    marginLeft: 10,
+    fontSize: 17,
+    fontWeight: "950",
+  },
+
+  filterButton: {
+    backgroundColor: colors.primary,
+    alignSelf: "center",
+    flex: 0.33,
+    borderWidth: 1.5,
+    margin: 5,
+    marginLeft: 10,
+    padding: 5,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+
+  modalFilterBox: {
+    backgroundColor: colors.secondary,
+    width: "90%",
+    alignSelf: "center",
+    alignItems: "center",
+    padding: 8,
+    paddingLeft: 15,
+    borderRadius: 15,
+    elevation: 10,
+    marginTop: 20,
+    fontFamily: fonts.primary,
+    fontSize: 15,
+  },
+
+  modalDestinationInput: {
+    backgroundColor: colors.primary,
+    width: "98%",
+    fontSize: 15,
+    borderRadius: 15,
+    margin: 10,
+    padding: 8,
+  },
+
+  modalTimeFilterText: {
+    backgroundColor: colors.primary,
+    textAlign: "center",
+    width: "98%",
+    fontSize: 15,
+    borderRadius: 15,
+    margin: 10,
+    padding: 8,
+  },
+
+  modalSubmitButton: {
+    backgroundColor: colors.primary,
+    width: 100,
+    color: colors.black,
+    textAlign: "center",
+    margin: 15,
+    padding: 8,
+    borderRadius: 10,
+    borderWidth: 1,
+    elevation: 5,
+    fontFamily: fonts.primary,
+    fontSize: 18,
+  },
+
   listStyle: {
-    margin: 0,
+    marginLeft: 20,
     padding: 0,
   },
 });

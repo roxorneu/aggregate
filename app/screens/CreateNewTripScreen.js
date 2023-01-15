@@ -21,6 +21,7 @@ import DateAndTimePicker from "../components/DateAndTimePicker";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 import strings from "../config/strings";
+import DateTimeFormatter from "../utils/DateTimeFormatter";
 
 const CreateNewTripScreen = ({ navigation }) => {
   const auth = getAuth();
@@ -40,13 +41,8 @@ const CreateNewTripScreen = ({ navigation }) => {
   //date.toISOString() is known to return date off by one day, to be fixed later
   const tripDateTime =
     date.toISOString().split("T")[0] + " " + time.toTimeString();
-  const formattedTime =
-    date.toISOString().split("T")[0] +
-    "T" +
-    time.toTimeString().split(" ")[0] +
-    "+05:30";
 
-  const epochTime = new Date(formattedTime);
+  const epochTime = DateTimeFormatter(date, time);
 
   const [destination, setDestination] = useState("");
   const [meetupPoint, setMeetupPoint] = useState("");
@@ -100,7 +96,7 @@ const CreateNewTripScreen = ({ navigation }) => {
           meetupPoint: meetupPoint.trim().toLowerCase(),
           vehicle: vehicle.trim().toLowerCase(),
           coTravellers: coTravellers.trim().toLowerCase(),
-          otherInfo: otherInfo.trim().toLowerCase(),
+          otherInfo: otherInfo.trim(),
         });
         console.log("Document written with ID: ", docRef.id);
         setDestination("");
@@ -131,6 +127,7 @@ const CreateNewTripScreen = ({ navigation }) => {
         setDate={setDate}
         time={time}
         setTime={setTime}
+        title="Meetup Time"
       />
 
       <TextInput

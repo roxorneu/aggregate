@@ -76,6 +76,7 @@ export default function App() {
             headerStyle: {
               backgroundColor: colors.secondary,
             },
+            title: "All Trips",
           }}
         />
       </Stack.Navigator>

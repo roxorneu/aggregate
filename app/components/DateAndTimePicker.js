@@ -35,7 +35,7 @@ export default function DateAndTimePicker(props) {
 
   return (
     <View style={format.departureStyle}>
-      <Text style={format.text}>Meetup Time </Text>
+      <Text style={format.text}>{props.title} </Text>
 
       <View style={format.dateTimeContainer}>
         <Text style={format.text}>{dayjs(date).format("DD MMM YYYY")} </Text>
@@ -99,7 +99,7 @@ const format = StyleSheet.create({
     padding: 8,
     paddingLeft: 15,
     borderRadius: 15,
-    elevation: 10,
+    elevation: 5,
     marginTop: 20,
   },
 
@@ -136,7 +136,7 @@ const format = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 5,
     borderWidth: 1,
-    borderRadius: 15,
+    borderRadius: 10,
     backgroundColor: colors.primary,
     borderColor: colors.black,
   },
