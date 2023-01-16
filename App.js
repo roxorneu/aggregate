@@ -1,7 +1,15 @@
 import "react-native-gesture-handler";
 
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, LogBox } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  LogBox,
+  Button,
+  ToastAndroid,
+  Pressable,
+} from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -14,6 +22,7 @@ import strings from "./app/config/strings";
 import RegisterScreen from "./app/screens/RegisterScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import colors from "./app/config/colors";
+import ProfileScreen from "./app/screens/ProfileScreen";
 
 const Stack = createStackNavigator();
 
@@ -26,6 +35,11 @@ export default function App() {
         <Stack.Screen
           name={strings.welcomeScreen}
           component={WelcomeScreen}
+          options={{ header: () => null }}
+        />
+        <Stack.Screen
+          name={strings.profileScreen}
+          component={ProfileScreen}
           options={{ header: () => null }}
         />
 
@@ -76,6 +90,7 @@ export default function App() {
             headerStyle: {
               backgroundColor: colors.secondary,
             },
+            headerTitleAlign: "center",
             title: "All Trips",
           }}
         />

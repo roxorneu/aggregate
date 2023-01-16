@@ -4,6 +4,7 @@ import {
   KeyboardAvoidingView,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import React from "react";
 
@@ -40,7 +41,19 @@ const LoginScreen = ({ navigation }) => {
 
         navigation.replace(strings.choosePathScreen);
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => {
+        Alert.alert(
+          "Login Unsuccessful",
+          error.message,
+          [
+            {
+              text: "OK",
+              style: "cancel",
+            },
+          ],
+          { cancelable: true }
+        );
+      });
   };
 
   return (

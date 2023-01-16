@@ -15,6 +15,7 @@ import {
 
 import {
   getAuth,
+  signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
@@ -44,6 +45,7 @@ const db = getFirestore(app);
 export {
   auth,
   getAuth,
+  signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
