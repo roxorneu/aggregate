@@ -1,10 +1,10 @@
 export default {
   //Screen Names
   welcomeScreen: `Welcome Screen`,
-  registerScreen: `Register Screen`,
+  registerScreen: `Register To Start Browsing`,
   loginScreen: `Login Screen`,
   choosePathScreen: `Choose Path Screen`,
-  createNewTripsScreen: `Create New Trip Screen`,
+  createNewTripsScreen: `Create A New Trip`,
   viewTripsScreen: `View Trips Screen`,
   profileScreen: `Profile Screen`,
 

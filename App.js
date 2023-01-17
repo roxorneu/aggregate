@@ -6,13 +6,16 @@ import {
   Text,
   View,
   LogBox,
-  Button,
+  Image,
   ToastAndroid,
   Pressable,
+  TouchableOpacity,
 } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+
+import { SimpleLineIcons } from "@expo/vector-icons";
 
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import ChoosePathScreen from "./app/screens/ChoosePathScreen";
@@ -23,15 +26,40 @@ import RegisterScreen from "./app/screens/RegisterScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import colors from "./app/config/colors";
 import ProfileScreen from "./app/screens/ProfileScreen";
+import ViewTripsDrawer from "./app/screens/ViewTripsDrawer";
 
 const Stack = createStackNavigator();
+
+function OptionsButton() {
+  return (
+    <Pressable
+      onPress={() => {
+        ToastAndroid.show("Options Pressed", 1000);
+        //navigation.navigate(ViewTripsDrawer);
+      }}
+      style={{ padding: 20 }}
+    >
+      <SimpleLineIcons name="options-vertical" size={15} color="black" />
+    </Pressable>
+  );
+}
 
 export default function App() {
   LogBox.ignoreAllLogs();
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerTitleAlign: "center",
+        }}
+      >
+        <Stack.Screen
+          name={"View Trips Drawer"}
+          component={ViewTripsDrawer}
+          options={{ title: "Trips Drawer" }}
+        />
+
         <Stack.Screen
           name={strings.welcomeScreen}
           component={WelcomeScreen}
@@ -40,7 +68,7 @@ export default function App() {
         <Stack.Screen
           name={strings.profileScreen}
           component={ProfileScreen}
-          options={{ header: () => null }}
+          options={{ title: "Your Profile" }}
         />
 
         <Stack.Screen
@@ -50,6 +78,7 @@ export default function App() {
             headerStyle: {
               backgroundColor: colors.secondary,
             },
+            headerTitleAlign: "center",
           }}
         />
 
@@ -70,6 +99,7 @@ export default function App() {
             headerStyle: {
               backgroundColor: colors.secondary,
             },
+            headerRight: () => <OptionsButton />,
           }}
         />
 
@@ -92,6 +122,7 @@ export default function App() {
             },
             headerTitleAlign: "center",
             title: "All Trips",
+            headerRight: () => <OptionsButton />,
           }}
         />
       </Stack.Navigator>

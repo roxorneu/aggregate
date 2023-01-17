@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@react-native-community/datetimepicker": "^6.7.1",
+    "@react-navigation/drawer": "^6.5.7",
     "@react-navigation/stack": "^6.3.10",
     "expo": "~47.0.9",
     "expo-status-bar": "~1.4.2",
@@ -17,7 +18,8 @@
     "react": "18.1.0",
     "react-native": "0.70.5",
     "react-native-gesture-handler": "~2.8.0",
-    "react-native-modal": "^13.0.1"
+    "react-native-modal": "^13.0.1",
+    "react-native-reanimated": "~2.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
