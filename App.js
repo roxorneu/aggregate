@@ -6,7 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import { SimpleLineIcons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import ChoosePathScreen from "./app/screens/ChoosePathScreen";
@@ -20,18 +20,18 @@ import ProfileScreen from "./app/screens/ProfileScreen";
 
 const Stack = createStackNavigator();
 
+// Choose Path Screen nests drawer into stack default stack navigator
 const Drawer = createDrawerNavigator();
 
-function OptionsButton() {
+function OptionsButton(props) {
   return (
     <Pressable
       onPress={() => {
-        ToastAndroid.show("Options Pressed", 1000);
-        console.log(navigator);
+        props.navigation.navigate(strings.profileScreen);
       }}
-      style={{ padding: 20 }}
+      style={{ paddingRight: 20 }}
     >
-      <SimpleLineIcons name="options-vertical" size={15} color="black" />
+      <FontAwesome5 name="user-circle" size={22} color="black" />
     </Pressable>
   );
 }
@@ -56,32 +56,35 @@ function DrawerNavigation() {
       <Drawer.Screen
         name={strings.choosePathScreen}
         component={ChoosePathScreen}
-        options={{
-          headerTitleAlign: "left",
+        options={({ navigation }) => ({
+          headerTitleAlign: "center",
           headerStyle: {
             backgroundColor: colors.secondary,
           },
-          title: "Let's Get Started",
+          title: "Let's Get Started!",
           drawerItemStyle: {
             display: "none",
           },
-        }}
+          headerRight: () => <OptionsButton navigation={navigation} />,
+        })}
       />
       <Drawer.Screen
         name={strings.viewTripsScreen}
         component={ViewTripsScreen}
-        options={{
+        options={({ navigation }) => ({
           title: "All Trips",
-        }}
+          headerRight: () => <OptionsButton navigation={navigation} />,
+        })}
       />
       <Drawer.Screen
         name={strings.createNewTripsScreen}
         component={CreateNewTripsScreen}
-        options={{
+        options={({ navigation }) => ({
           headerStyle: {
             backgroundColor: colors.secondary,
           },
-        }}
+          headerRight: () => <OptionsButton navigation={navigation} />,
+        })}
       />
 
       <Drawer.Screen
@@ -131,17 +134,6 @@ export default function App() {
         />
 
         <Stack.Screen
-          name={strings.createNewTripsScreen}
-          component={CreateNewTripsScreen}
-          options={{
-            headerStyle: {
-              backgroundColor: colors.secondary,
-            },
-            headerRight: () => <OptionsButton />,
-          }}
-        />
-
-        <Stack.Screen
           name={strings.choosePathScreen}
           component={DrawerNavigation}
           options={{
@@ -150,19 +142,6 @@ export default function App() {
             },
             header: () => null,
             //headerRight: () => <OptionsButton />,
-          }}
-        />
-
-        <Stack.Screen
-          name={strings.viewTripsScreen}
-          component={ViewTripsScreen}
-          options={{
-            headerStyle: {
-              backgroundColor: colors.secondary,
-            },
-            headerTitleAlign: "center",
-            title: "All Trips",
-            headerRight: () => <OptionsButton />,
           }}
         />
       </Stack.Navigator>
