@@ -25,8 +25,12 @@ import { TextInput } from "react-native-gesture-handler";
 import DateAndTimePicker from "../components/DateAndTimePicker";
 import DateTimeFormatter from "../utils/DateTimeFormatter";
 import QueryToDocList from "../utils/QueryToDocList";
+import { StatusBar } from "expo-status-bar";
 
-const ViewTripsScreen = () => {
+const ViewTripsScreen = ({ navigation }) => {
+  console.log("Here");
+  console.log(navigation);
+  //navigation.openDrawer();
   const [refreshing, setRefreshing] = useState(false);
   const [tripsList, setTripsList] = useState([]);
 
