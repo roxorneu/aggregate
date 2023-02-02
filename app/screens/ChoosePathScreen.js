@@ -66,12 +66,12 @@ const styles = StyleSheet.create({
   },
 
   newTripText: {
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
     fontSize: 20,
   },
 
   viewTripsText: {
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
     fontSize: 20,
   },
 });

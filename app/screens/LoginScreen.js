@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     elevation: 10,
     marginTop: 20,
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
   },
 
   loginButton: {
@@ -111,10 +111,10 @@ const styles = StyleSheet.create({
     height: 40,
     elevation: 10,
     marginTop: 50,
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
   },
 
   loginText: {
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
   },
 });

@@ -6,6 +6,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
+import { useFonts } from "expo-font";
+
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import WelcomeScreen from "./app/screens/WelcomeScreen";
@@ -98,6 +100,14 @@ function DrawerNavigation() {
 
 export default function App() {
   LogBox.ignoreAllLogs();
+
+  const [fontsLoaded] = useFonts({
+    RobotoMono: require("./app/assets/RobotoMono.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <NavigationContainer>

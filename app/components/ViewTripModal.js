@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginTop: 5,
     marginBottom: 3,
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
   },
   propStyle: {
     //textDecorationLine: "underline",

@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginRight: 15,
     padding: 5,
+    fontFamily: fonts.secondry,
   },
 
   arrowIcon: {
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginTop: 5,
     marginBottom: 3,
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
     flexWrap: "wrap",
     flexGrow: 1,
   },
@@ -129,5 +130,6 @@ const styles = StyleSheet.create({
     //textDecorationLine: "underline",
     fontWeight: "500",
     textTransform: "capitalize",
+    fontFamily: fonts.secondry,
   },
 });

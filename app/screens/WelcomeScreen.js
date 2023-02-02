@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
 
   logoText: {
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
     fontSize: 25,
 
     marginTop: 300,
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
 
   loginText: {
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
   },
 
   registerButton: {
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   },
 
   registerText: {
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
   },
 });
 

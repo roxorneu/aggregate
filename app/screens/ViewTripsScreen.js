@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     elevation: 10,
     marginTop: 20,
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
     fontSize: 15,
   },
 
@@ -303,7 +303,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     elevation: 5,
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
     fontSize: 18,
   },
 

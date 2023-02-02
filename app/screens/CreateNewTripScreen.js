@@ -189,13 +189,13 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     elevation: 10,
     marginTop: 20,
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
     fontSize: 15,
   },
 
   tripTitleStyle: {
     //to be replaced with trip nickname later
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
     fontSize: 25,
     marginBottom: 25,
   },
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     elevation: 5,
     marginTop: 20,
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
     fontSize: 20,
   },
 });
