@@ -43,17 +43,17 @@ const ProfileScreen = ({ navigation }) => {
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.profileBox}>
         <View style={styles.infoBoxes}>
-          <Text>Name: </Text>
+          <Text style={styles.keyStyle}>Name: </Text>
           <Text style={styles.propStyle}>{user.displayName}</Text>
         </View>
         <View style={styles.infoBoxes}>
-          <Text>Contact: </Text>
+          <Text style={styles.keyStyle}>Contact: </Text>
           <Text style={styles.propStyle}>
             {user.phoneNumber === null ? "Not provided" : user.phoneNumber}
           </Text>
         </View>
         <View style={styles.infoBoxes}>
-          <Text>Email: </Text>
+          <Text style={styles.keyStyle}>Email: </Text>
           <Text style={styles.propStyle}>{user.email}</Text>
         </View>
       </View>
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: colors.primary,
     borderWidth: 0,
-    //borderStyle: "dotted",
   },
 
   infoBoxes: {
@@ -95,11 +94,16 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginTop: 5,
     marginBottom: 3,
-    fontFamily: fonts.primary,
   },
+
+  keyStyle: {
+    fontWeight: "500",
+    textTransform: "capitalize",
+    fontFamily: fonts.secondry,
+  },
+
   propStyle: {
-    //textDecorationLine: "underline",
-    fontWeight: "900",
+    fontFamily: fonts.tertiary,
     textTransform: "capitalize",
   },
 
@@ -112,10 +116,9 @@ const styles = StyleSheet.create({
     height: 40,
     elevation: 10,
     marginTop: 50,
-    fontFamily: fonts.primary,
   },
 
   logoutText: {
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
   },
 });

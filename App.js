@@ -19,6 +19,7 @@ import RegisterScreen from "./app/screens/RegisterScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import colors from "./app/config/colors";
 import ProfileScreen from "./app/screens/ProfileScreen";
+import fonts from "./app/config/fonts";
 
 const Stack = createStackNavigator();
 
@@ -46,12 +47,19 @@ function DrawerNavigation() {
         headerStyle: {
           backgroundColor: colors.secondary,
         },
+        headerTitleStyle: {
+          fontFamily: fonts.secondry,
+        },
         headerTitleAlign: "center",
         headerStatusBarHeight: StatusBar.currentHeight,
         drawerPosition: "left",
         drawerActiveTintColor: colors.primary,
         drawerStyle: {
           backgroundColor: colors.secondary,
+        },
+        drawerLabelStyle: {
+          fontFamily: fonts.secondry,
+          //fontWeight: "700",
         },
       }}
     >
@@ -103,6 +111,7 @@ export default function App() {
 
   const [fontsLoaded] = useFonts({
     RobotoMono: require("./app/assets/RobotoMono.ttf"),
+    RobotoMonoBold: require("./app/assets/RobotoMono-Bold.ttf"),
   });
 
   if (!fontsLoaded) {
@@ -113,7 +122,11 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerTitleAlign: "center",
+          headerTitleAlign: "left",
+
+          headerTitleStyle: {
+            fontFamily: fonts.secondry,
+          },
         }}
       >
         <Stack.Screen

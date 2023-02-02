@@ -120,7 +120,7 @@ const format = StyleSheet.create({
     padding: 5,
     marginBottom: 12,
     alignSelf: "flex-start",
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
   },
 
   buttonText: {
@@ -128,7 +128,7 @@ const format = StyleSheet.create({
     padding: 5,
     textAlign: "left",
     color: colors.black,
-    fontFamily: fonts.primary,
+    fontFamily: fonts.secondry,
   },
 
   buttons: {

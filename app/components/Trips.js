@@ -78,12 +78,12 @@ const Trips = (props) => {
       </View>
 
       <View style={styles.infoBoxes}>
-        <Text>Going To: </Text>
+        <Text style={styles.keyStyle}>Going To: </Text>
         <Text style={styles.propStyle}>{props.destination}</Text>
       </View>
       <View style={styles.infoBoxes}>
-        <Text>Meetup Time: </Text>
-        <Text style={{ fontWeight: "500" }}>{displayTime}</Text>
+        <Text style={styles.keyStyle}>Meetup Time: </Text>
+        <Text style={styles.timePropStyle}>{displayTime}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -122,14 +122,21 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginTop: 5,
     marginBottom: 3,
-    fontFamily: fonts.secondry,
     flexWrap: "wrap",
     flexGrow: 1,
   },
-  propStyle: {
-    //textDecorationLine: "underline",
-    fontWeight: "500",
+  keyStyle: {
     textTransform: "capitalize",
     fontFamily: fonts.secondry,
+  },
+
+  propStyle: {
+    textTransform: "capitalize",
+    fontFamily: fonts.tertiary,
+  },
+
+  timePropStyle: {
+    //textTransform: "capitalize",
+    fontFamily: fonts.tertiary,
   },
 });

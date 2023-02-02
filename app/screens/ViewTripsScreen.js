@@ -119,18 +119,18 @@ const ViewTripsScreen = ({ navigation }) => {
       {refreshing ? <ActivityIndicator /> : null}
 
       <View style={styles.tripFiltersContainer}>
-        <Text style={styles.filterText}> Search By </Text>
+        <Text style={styles.filterText}> Filter By: </Text>
         <TouchableOpacity
           style={styles.filterButton}
           onPress={() => setFilterDestination(true)}
         >
-          <Text> Destination </Text>
+          <Text style={styles.filterBoxText}>Destination</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.filterButton}
           onPress={() => setFilterTime(true)}
         >
-          <Text> Meetup Time </Text>
+          <Text style={styles.filterBoxText}> Meetup Time </Text>
         </TouchableOpacity>
       </View>
 
@@ -143,13 +143,13 @@ const ViewTripsScreen = ({ navigation }) => {
         <View style={styles.modalFilterBox}>
           <TextInput
             style={styles.modalDestinationInput}
-            placeholder="Where do you want to go?"
+            placeholder="Enter your destination"
             value={tripDestination}
             onChangeText={(text) => setTripDestination(text)}
           />
 
           <Pressable onPress={handleDestinationFiltering}>
-            <Text style={styles.modalSubmitButton}> Filter! </Text>
+            <Text style={styles.modalSubmitButton}>Filter!</Text>
           </Pressable>
         </View>
       </Modal>
@@ -244,8 +244,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     flex: 0.3,
     marginLeft: 10,
-    fontSize: 17,
-    fontWeight: "950",
+    fontSize: 14,
+    fontFamily: fonts.secondry,
   },
 
   filterButton: {
@@ -260,9 +260,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
+  filterBoxText: {
+    fontFamily: fonts.secondry,
+  },
+
   modalFilterBox: {
     backgroundColor: colors.secondary,
-    width: "90%",
+    width: "95%",
     alignSelf: "center",
     alignItems: "center",
     padding: 8,
@@ -281,6 +285,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     margin: 10,
     padding: 8,
+    fontFamily: fonts.secondry,
   },
 
   modalTimeFilterText: {
@@ -291,11 +296,12 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     margin: 10,
     padding: 8,
+    fontFamily: fonts.secondry,
   },
 
   modalSubmitButton: {
     backgroundColor: colors.primary,
-    width: 100,
+    width: 130,
     color: colors.black,
     textAlign: "center",
     margin: 15,

@@ -22,32 +22,32 @@ const ViewTripModal = (props) => {
         </Pressable>
       </View>
       <View style={styles.infoBoxes}>
-        <Text>Going To: </Text>
+        <Text style={styles.keyStyle}>Going To: </Text>
         <Text style={styles.propStyle}>{props.destination}</Text>
       </View>
       <View style={styles.infoBoxes}>
-        <Text>Meetup Time: </Text>
-        <Text style={{ fontWeight: "900" }}>{props.meetupTime}</Text>
+        <Text style={styles.keyStyle}>Meetup Time: </Text>
+        <Text style={styles.timePropStyle}>{props.meetupTime}</Text>
       </View>
 
       <View style={styles.infoBoxes}>
-        <Text>Trip Host: </Text>
+        <Text style={styles.keyStyle}>Trip Host: </Text>
         <Text style={styles.propStyle}>{props.userName}</Text>
       </View>
       <View style={styles.infoBoxes}>
-        <Text>Meetup Point: </Text>
+        <Text style={styles.keyStyle}>Meetup Point: </Text>
         <Text style={styles.propStyle}>{props.meetupPoint}</Text>
       </View>
       <View style={styles.infoBoxes}>
-        <Text>Number of Co-Travellers: </Text>
+        <Text style={styles.keyStyle}>Number of Co-Travellers: </Text>
         <Text style={styles.propStyle}>{props.coTravellers}</Text>
       </View>
       <View style={styles.infoBoxes}>
-        <Text>Vehicle: </Text>
+        <Text style={styles.keyStyle}>Vehicle: </Text>
         <Text style={styles.propStyle}>{props.vehicle}</Text>
       </View>
       <View style={styles.infoBoxes}>
-        <Text>Other Info: </Text>
+        <Text style={styles.keyStyle}>Other Info: </Text>
         <Text style={{ fontWeight: "500" }}>{props.otherInfo}</Text>
       </View>
     </View>
@@ -88,9 +88,17 @@ const styles = StyleSheet.create({
     marginBottom: 3,
     fontFamily: fonts.secondry,
   },
-  propStyle: {
-    //textDecorationLine: "underline",
-    fontWeight: "900",
+  keyStyle: {
+    fontWeight: "500",
     textTransform: "capitalize",
+    fontFamily: fonts.secondry,
+  },
+
+  propStyle: {
+    fontFamily: fonts.tertiary,
+    textTransform: "capitalize",
+  },
+  timePropStyle: {
+    fontFamily: fonts.tertiary,
   },
 });
