@@ -32,7 +32,7 @@ const ViewTripModal = (props) => {
 
       <View style={styles.infoBoxes}>
         <Text style={styles.keyStyle}>Trip Host: </Text>
-        <Text style={styles.propStyle}>{props.userName}</Text>
+        <Text style={styles.propStyle}>{props.userName.split("|")[0]}</Text>
       </View>
       <View style={styles.infoBoxes}>
         <Text style={styles.keyStyle}>Meetup Point: </Text>

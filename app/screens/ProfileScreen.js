@@ -19,6 +19,7 @@ const ProfileScreen = ({ navigation }) => {
 
   if (user) {
     // User is signed in
+    //console.log(user.phoneNumber);
   } else {
     // User is signed out
     navigation.navigate(strings.welcomeScreen);

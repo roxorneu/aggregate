@@ -11,11 +11,23 @@ import {
 
 import { useState, useEffect } from "react";
 
+import { getAuth, signOut } from "../../firebase";
+
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 import strings from "../config/strings";
 
 function WelcomeScreen({ navigation }) {
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  if (user) {
+    // User is signed in
+    navigation.navigate(strings.choosePathScreen);
+  } else {
+    // User is signed out
+  }
+
   const value = useState(new Animated.ValueXY({ x: 300, y: 300 }))[0];
 
   function animateLogo() {
