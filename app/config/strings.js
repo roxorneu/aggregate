@@ -15,7 +15,7 @@ export default {
 
   //Register, Login Screen strings
   nameString: `Name`,
-  phoneString: `Contact`,
+  locationString: `City`,
   emailString: `Email`,
   passwordString: `Password`,
 

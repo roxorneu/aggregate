@@ -59,7 +59,6 @@ function DrawerNavigation() {
         },
         drawerLabelStyle: {
           fontFamily: fonts.secondry,
-          //fontWeight: "700",
         },
       }}
     >
@@ -123,7 +122,6 @@ export default function App() {
       <Stack.Navigator
         screenOptions={{
           headerTitleAlign: "left",
-
           headerTitleStyle: {
             fontFamily: fonts.secondry,
           },
@@ -164,7 +162,6 @@ export default function App() {
               backgroundColor: colors.secondary,
             },
             header: () => null,
-            //headerRight: () => <OptionsButton />,
           }}
         />
       </Stack.Navigator>

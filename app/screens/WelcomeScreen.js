@@ -9,7 +9,7 @@ import {
   Animated,
 } from "react-native";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import colors from "../config/colors";
 import fonts from "../config/fonts";
@@ -33,6 +33,10 @@ function WelcomeScreen({ navigation }) {
       useNativeDriver: false,
     }).start();
   }
+
+  useEffect(() => {
+    animateLogo();
+  }, []);
 
   return (
     <ImageBackground style={styles.background}>

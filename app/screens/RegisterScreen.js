@@ -22,7 +22,7 @@ import {
 
 const RegisterScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
-  const [contact, setContact] = useState("");
+  const [location, setLocation] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -35,10 +35,10 @@ const RegisterScreen = ({ navigation }) => {
       })
       .then(() => {
         updateProfile(auth.currentUser, {
-          displayName: username,
+          displayName: username + "|" + location,
           photoURL: "",
         }).then(() => {
-          console.log("Updated name and contact");
+          console.log("Updated name and location");
           navigation.replace(strings.choosePathScreen);
         });
       })
@@ -55,10 +55,9 @@ const RegisterScreen = ({ navigation }) => {
       />
       <TextInput
         style={styles.inputBoxes}
-        placeholder={strings.phoneString}
-        keyboardType={Platform.OS === "ios" ? "number-pad" : "numeric"}
-        value={contact}
-        onChangeText={(text) => setContact(text)}
+        placeholder={strings.locationString}
+        value={location}
+        onChangeText={(text) => setLocation(text)}
       />
       <TextInput
         style={styles.inputBoxes}

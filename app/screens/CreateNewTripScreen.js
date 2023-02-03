@@ -113,7 +113,9 @@ const CreateNewTripScreen = ({ navigation }) => {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <Text style={styles.tripTitleStyle}>{user.displayName}'s New Trip</Text>
+      <Text style={styles.tripTitleStyle}>
+        {user.displayName.split("|")[0]}'s New Trip
+      </Text>
 
       <TextInput
         placeholder="Going To"

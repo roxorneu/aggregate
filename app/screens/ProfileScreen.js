@@ -19,8 +19,6 @@ const ProfileScreen = ({ navigation }) => {
 
   if (user) {
     // User is signed in
-    // console.log(user.uid);
-    console.log(user.phoneNumber);
   } else {
     // User is signed out
     navigation.navigate(strings.welcomeScreen);
@@ -44,12 +42,14 @@ const ProfileScreen = ({ navigation }) => {
       <View style={styles.profileBox}>
         <View style={styles.infoBoxes}>
           <Text style={styles.keyStyle}>Name: </Text>
-          <Text style={styles.propStyle}>{user.displayName}</Text>
+          <Text style={styles.propStyle}>{user.displayName.split("|")[0]}</Text>
         </View>
         <View style={styles.infoBoxes}>
-          <Text style={styles.keyStyle}>Contact: </Text>
+          <Text style={styles.keyStyle}>City: </Text>
           <Text style={styles.propStyle}>
-            {user.phoneNumber === null ? "Not provided" : user.phoneNumber}
+            {user.displayName.split("|")[1] == null
+              ? "Not provided"
+              : user.displayName.split("|")[1]}
           </Text>
         </View>
         <View style={styles.infoBoxes}>
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
 
   propStyle: {
     fontFamily: fonts.tertiary,
-    textTransform: "capitalize",
+    //textTransform: "capitalize",
   },
 
   logoutButton: {

@@ -48,7 +48,7 @@ const ViewTripModal = (props) => {
       </View>
       <View style={styles.infoBoxes}>
         <Text style={styles.keyStyle}>Other Info: </Text>
-        <Text style={{ fontWeight: "500" }}>{props.otherInfo}</Text>
+        <Text style={styles.timePropStyle}>{props.otherInfo}</Text>
       </View>
     </View>
   );
@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
   arrowIcon: {
     position: "absolute",
     alignSelf: "flex-end",
-    bottom: 8,
-    right: 4,
+    bottom: 4,
+    padding: 4,
   },
 
   infoBoxes: {
@@ -97,8 +97,11 @@ const styles = StyleSheet.create({
   propStyle: {
     fontFamily: fonts.tertiary,
     textTransform: "capitalize",
+    width: "70%",
   },
+
   timePropStyle: {
     fontFamily: fonts.tertiary,
+    width: "70%",
   },
 });

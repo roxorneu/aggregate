@@ -45,7 +45,7 @@ const Trips = (props) => {
   return (
     <TouchableOpacity
       style={styles.container}
-      activeOpacity={0.95}
+      activeOpacity={0.98}
       onPress={() => setIsExpanded(!isExpanded)}
     >
       <Modal
@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.secondary,
     width: "45%",
     justifyContent: "center",
-    //alignItems: "center",
     borderRadius: 15,
     elevation: 2,
     marginTop: 10,

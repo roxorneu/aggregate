@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 
 import Modal from "react-native-modal";
 
-import { db, collection, getDocs, query, where } from "../../firebase";
+import { db, collection, getDocs, query, where, getAuth } from "../../firebase";
 
 import colors from "../config/colors";
 import fonts from "../config/fonts";
@@ -27,6 +27,9 @@ import DateTimeFormatter from "../utils/DateTimeFormatter";
 import QueryToDocList from "../utils/QueryToDocList";
 
 const ViewTripsScreen = ({ navigation }) => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+
   const [refreshing, setRefreshing] = useState(false);
   const [tripsList, setTripsList] = useState([]);
 
@@ -35,6 +38,8 @@ const ViewTripsScreen = ({ navigation }) => {
 
   const getTrips = async () => {
     //Single query with for all data chosen over multiple queries within modal etc.
+    // Current query returns all possible trips, in future to be replaced by location filtering
+    // where("destination", "==", user.displayName.split("|")[1])
 
     const q = query(
       collection(db, "trips"),
