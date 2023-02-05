@@ -29,12 +29,12 @@ const ProfileScreen = ({ navigation }) => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        console.log("Logout successful");
+        //console.log("Logout successful");
         navigation.navigate(strings.welcomeScreen);
       })
       .catch((error) => {
         // An error happened.
-        console.log("Couldn't logout");
+        //console.log("Couldn't logout");
       });
   };
 
@@ -42,11 +42,11 @@ const ProfileScreen = ({ navigation }) => {
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.profileBox}>
         <View style={styles.infoBoxes}>
-          <Text style={styles.keyStyle}>Name: </Text>
+          <Text style={styles.keyStyle}>{strings.ps_nameString}</Text>
           <Text style={styles.propStyle}>{user.displayName.split("|")[0]}</Text>
         </View>
         <View style={styles.infoBoxes}>
-          <Text style={styles.keyStyle}>City: </Text>
+          <Text style={styles.keyStyle}>{strings.ps_locationString}</Text>
           <Text style={styles.propStyle}>
             {user.displayName.split("|")[1] == null
               ? "Not provided"
@@ -54,12 +54,12 @@ const ProfileScreen = ({ navigation }) => {
           </Text>
         </View>
         <View style={styles.infoBoxes}>
-          <Text style={styles.keyStyle}>Email: </Text>
+          <Text style={styles.keyStyle}>{strings.ps_emailString}</Text>
           <Text style={styles.propStyle}>{user.email}</Text>
         </View>
       </View>
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-        <Text style={styles.logoutText}> Logout </Text>
+        <Text style={styles.logoutText}>{strings.ps_logOutButtonText}</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );

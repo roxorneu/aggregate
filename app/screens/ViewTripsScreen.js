@@ -25,6 +25,7 @@ import { TextInput } from "react-native-gesture-handler";
 import DateAndTimePicker from "../components/DateAndTimePicker";
 import DateTimeFormatter from "../utils/DateTimeFormatter";
 import QueryToDocList from "../utils/QueryToDocList";
+import strings from "../config/strings";
 
 const ViewTripsScreen = ({ navigation }) => {
   const auth = getAuth();
@@ -67,6 +68,11 @@ const ViewTripsScreen = ({ navigation }) => {
   const [toDate, setToDate] = useState(new Date());
   const [toTime, setToTime] = useState(new Date(Date.now()));
 
+  const handleEmptyList = () => {
+    ToastAndroid.show("No matching trips found,\n     Showing all trips", 2000);
+    return false;
+  };
+
   const handleDestinationFiltering = async () => {
     if (tripDestination.trim() === "") {
       setFilterDestination(false);
@@ -84,22 +90,15 @@ const ViewTripsScreen = ({ navigation }) => {
     QueryToDocList(querySnapshot, tempList);
 
     if (tempList.length === 0) {
-      ToastAndroid.show(
-        "No matching trips found,\n     Showing all trips",
-        2000
-      );
       setTripDestination("");
-      return;
+      return handleEmptyList();
     }
     setTripsList(tempList);
     setTripDestination("");
-    ToastAndroid.show("Pull down to reset filter", 1000);
+    ToastAndroid.show("Pull down to reset filter", 2000);
   };
 
   const handleTimeFiltering = async () => {
-    //console.log(DateTimeFormatter(fromDate, fromTime).valueOf());
-    //console.log(DateTimeFormatter(toDate, toTime).valueOf());
-
     setFilterTime(false);
     const q = query(
       collection(db, collectionByCity),
@@ -111,14 +110,10 @@ const ViewTripsScreen = ({ navigation }) => {
     QueryToDocList(querySnapshot, tempList);
 
     if (tempList.length === 0) {
-      ToastAndroid.show(
-        "No matching trips found,\n     Showing all trips",
-        2000
-      );
-      return;
+      return handleEmptyList();
     }
     setTripsList(tempList);
-    ToastAndroid.show("Pull down to reset filter", 1000);
+    ToastAndroid.show("Pull down to reset filter", 2000);
   };
 
   return (
@@ -126,18 +121,22 @@ const ViewTripsScreen = ({ navigation }) => {
       {refreshing ? <ActivityIndicator /> : null}
 
       <View style={styles.tripFiltersContainer}>
-        <Text style={styles.filterText}> Filter By: </Text>
+        <Text style={styles.filterText}> {strings.vts_filterLabel} </Text>
         <TouchableOpacity
           style={styles.filterButton}
           onPress={() => setFilterDestination(true)}
         >
-          <Text style={styles.filterBoxText}>Destination</Text>
+          <Text style={styles.filterBoxText}>
+            {strings.vts_destinationFilterLabel}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.filterButton}
           onPress={() => setFilterTime(true)}
         >
-          <Text style={styles.filterBoxText}> Meetup Time </Text>
+          <Text style={styles.filterBoxText}>
+            {strings.vts_meetupTimeFilterLabel}
+          </Text>
         </TouchableOpacity>
       </View>
 

@@ -60,20 +60,20 @@ const LoginScreen = ({ navigation }) => {
     <KeyboardAvoidingView style={styles.container}>
       <TextInput
         style={styles.inputBoxes}
-        placeholder={strings.emailString}
+        placeholder={strings.rs_emailString}
         keyboardType="visible-password"
         value={email}
         onChangeText={(text) => setEmail(text)}
       />
       <TextInput
         style={styles.inputBoxes}
-        placeholder={strings.passwordString}
+        placeholder={strings.rs_passwordString}
         secureTextEntry
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-        <Text style={styles.loginText}> Login! </Text>
+        <Text style={styles.loginText}> {strings.ls_loginButtonText} </Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );

@@ -11,7 +11,7 @@ import {
 
 import { useState, useEffect } from "react";
 
-import { getAuth, signOut } from "../../firebase";
+import { getAuth } from "../../firebase";
 
 import colors from "../config/colors";
 import fonts from "../config/fonts";
@@ -24,9 +24,10 @@ function WelcomeScreen({ navigation }) {
   if (user) {
     // User is signed in
     navigation.navigate(strings.choosePathScreen);
-  } else {
-    // User is signed out
   }
+  //else {
+  // User is signed out
+  //}
 
   const value = useState(new Animated.ValueXY({ x: 300, y: 300 }))[0];
 
@@ -60,19 +61,19 @@ function WelcomeScreen({ navigation }) {
         </Animated.View>
       </View>
 
-      <Text style={styles.logoText}> {strings.appName} </Text>
+      <Text style={styles.logoText}> {strings.ws_appName} </Text>
       <Pressable
         style={styles.loginButton}
         onPress={() => navigation.navigate(strings.loginScreen)}
       >
-        <Text style={styles.loginText}>{strings.loginButtonText}</Text>
+        <Text style={styles.loginText}>{strings.ws_loginButtonText}</Text>
       </Pressable>
 
       <Pressable
         style={styles.registerButton}
         onPress={() => navigation.navigate(strings.registerScreen)}
       >
-        <Text style={styles.registerText}>{strings.registerButtonText}</Text>
+        <Text style={styles.registerText}>{strings.ws_registerButtonText}</Text>
       </Pressable>
     </ImageBackground>
   );

@@ -31,14 +31,14 @@ const RegisterScreen = ({ navigation }) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
-        console.log("Registered " + user.email);
+        //console.log("Registered " + user.email);
       })
       .then(() => {
         updateProfile(auth.currentUser, {
           displayName: username + "|" + location,
           photoURL: "",
         }).then(() => {
-          console.log("Updated name and location");
+          //console.log("Updated name and location");
           navigation.replace(strings.choosePathScreen);
         });
       })
@@ -49,33 +49,33 @@ const RegisterScreen = ({ navigation }) => {
     <KeyboardAvoidingView style={styles.container}>
       <TextInput
         style={styles.inputBoxes}
-        placeholder={strings.nameString}
+        placeholder={strings.rs_nameString}
         value={username}
         onChangeText={(text) => setUsername(text)}
       />
       <TextInput
         style={styles.inputBoxes}
-        placeholder={strings.locationString}
+        placeholder={strings.rs_locationString}
         value={location}
         onChangeText={(text) => setLocation(text)}
       />
       <TextInput
         style={styles.inputBoxes}
-        placeholder={strings.emailString}
+        placeholder={strings.rs_emailString}
         keyboardType="visible-password"
         value={email}
         onChangeText={(text) => setEmail(text)}
       />
       <TextInput
         style={styles.inputBoxes}
-        placeholder={strings.passwordString}
+        placeholder={strings.rs_passwordString}
         secureTextEntry
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
 
       <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
-        <Text style={styles.registerText}> Submit </Text>
+        <Text style={styles.registerText}> {strings.rs_submitButtonText} </Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );

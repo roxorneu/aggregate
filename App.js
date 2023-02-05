@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 
-import { LogBox, ToastAndroid, Pressable, StatusBar } from "react-native";
+import { LogBox, Pressable, StatusBar } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -70,7 +70,7 @@ function DrawerNavigation() {
           headerStyle: {
             backgroundColor: colors.secondary,
           },
-          title: "Let's Get Started!",
+          title: strings.choosePathScreen,
           drawerItemStyle: {
             display: "none",
           },
@@ -81,7 +81,7 @@ function DrawerNavigation() {
         name={strings.viewTripsScreen}
         component={ViewTripsScreen}
         options={({ navigation }) => ({
-          title: "All Trips",
+          title: strings.viewTripsScreen,
           headerRight: () => <OptionsButton navigation={navigation} />,
         })}
       />
@@ -99,7 +99,7 @@ function DrawerNavigation() {
       <Drawer.Screen
         name={strings.profileScreen}
         component={ProfileScreen}
-        options={{ title: "Your Profile" }}
+        options={{ title: strings.profileScreen }}
       />
     </Drawer.Navigator>
   );

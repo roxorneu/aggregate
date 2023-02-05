@@ -1,10 +1,4 @@
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
@@ -19,7 +13,7 @@ const ChoosePathScreen = ({ navigation }) => {
           navigation.navigate(strings.createNewTripsScreen);
         }}
       >
-        <Text style={styles.newTripText}>{strings.createNewTripText}</Text>
+        <Text style={styles.newTripText}>{strings.cps_createNewTripText}</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.newTripBox}
@@ -28,7 +22,7 @@ const ChoosePathScreen = ({ navigation }) => {
         }}
       >
         <Text style={styles.viewTripsText}>
-          {strings.viewExistingTripsText}
+          {strings.cps_viewExistingTripsText}
         </Text>
       </TouchableOpacity>
     </SafeAreaView>

@@ -63,7 +63,7 @@ const CreateNewTripScreen = ({ navigation }) => {
   const handleAlerts = (fieldName) => {
     Alert.alert(
       fieldName + " cannot be blank",
-      "Please add a " + fieldName.toLowerCase(),
+      "Please add a " + fieldName.toLowerCase() + ".",
       [
         {
           text: "OK",
@@ -105,7 +105,7 @@ const CreateNewTripScreen = ({ navigation }) => {
             isVisible: true,
           }
         );
-        console.log("Document written with ID: ", docRef.id);
+        //console.log("Document written with ID: ", docRef.id);
         setDestination("");
         setMeetupPoint("");
         setVehicle("");
@@ -125,7 +125,7 @@ const CreateNewTripScreen = ({ navigation }) => {
       </Text>
 
       <TextInput
-        placeholder="Going To"
+        placeholder={strings.cnts_destinationPlaceholder}
         style={styles.inputBoxes}
         value={destination}
         onChangeText={(text) => setDestination(text)}
@@ -136,32 +136,32 @@ const CreateNewTripScreen = ({ navigation }) => {
         setDate={setDate}
         time={time}
         setTime={setTime}
-        title="Meetup Time"
+        title={strings.cnts_meetupTimeString}
       />
 
       <TextInput
-        placeholder="Meetup Point"
+        placeholder={strings.cnts_meetupPointPlaceholder}
         style={styles.inputBoxes}
         value={meetupPoint}
         onChangeText={(text) => setMeetupPoint(text)}
       />
 
       <TextInput
-        placeholder="Vehicle"
+        placeholder={strings.cnts_vehiclePlaceholder}
         style={styles.inputBoxes}
         value={vehicle}
         onChangeText={(text) => setVehicle(text)}
       />
 
       <TextInput
-        placeholder="Number of Co-Travellers"
+        placeholder={strings.cnts_coTravellersPlaceholder}
         style={styles.inputBoxes}
         value={coTravellers}
         onChangeText={(text) => setCoTravellers(text.trim())}
         keyboardType={Platform.OS === "ios" ? "number-pad" : "numeric"}
       />
       <TextInput
-        placeholder="Other Information"
+        placeholder={strings.cnts_otherInfoPlaceholder}
         style={styles.inputBoxes}
         value={otherInfo}
         onChangeText={(text) => setOtherInfo(text)}
@@ -171,7 +171,10 @@ const CreateNewTripScreen = ({ navigation }) => {
 
       <Pressable>
         <TouchableOpacity onPress={handleSubmitTrip}>
-          <Text style={styles.submitButton}> Submit! </Text>
+          <Text style={styles.submitButton}>
+            {" "}
+            {strings.cnts_submitTripButtonText}{" "}
+          </Text>
         </TouchableOpacity>
       </Pressable>
     </KeyboardAvoidingView>
