@@ -36,13 +36,15 @@ const ViewTripsScreen = ({ navigation }) => {
   const [filterDestination, setFilterDestination] = useState(false);
   const [filterTime, setFilterTime] = useState(false);
 
+  const collectionByCity = user.displayName.split("|")[1];
+
   const getTrips = async () => {
     //Single query with for all data chosen over multiple queries within modal etc.
     // Current query returns all possible trips, in future to be replaced by location filtering
     // where("destination", "==", user.displayName.split("|")[1])
 
     const q = query(
-      collection(db, "trips"),
+      collection(db, collectionByCity),
       where("dateTime", ">=", new Date().getTime())
     );
 
@@ -74,7 +76,7 @@ const ViewTripsScreen = ({ navigation }) => {
     setFilterDestination(false);
 
     const q = query(
-      collection(db, "trips"),
+      collection(db, collectionByCity),
       where("destination", "==", tripDestination.toLowerCase().trim())
     );
     const querySnapshot = await getDocs(q);
@@ -100,7 +102,7 @@ const ViewTripsScreen = ({ navigation }) => {
 
     setFilterTime(false);
     const q = query(
-      collection(db, "trips"),
+      collection(db, collectionByCity),
       where("dateTime", ">=", DateTimeFormatter(fromDate, fromTime).valueOf()),
       where("dateTime", "<=", DateTimeFormatter(toDate, toTime).valueOf())
     );

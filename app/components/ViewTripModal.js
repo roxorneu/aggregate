@@ -102,6 +102,6 @@ const styles = StyleSheet.create({
 
   timePropStyle: {
     fontFamily: fonts.tertiary,
-    width: "70%",
+    width: "68%",
   },
 });

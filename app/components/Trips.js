@@ -22,9 +22,10 @@ import ViewTripModal from "../components/ViewTripModal";
 const Trips = (props) => {
   const meetupTime = props.meetupTime.split(" ");
 
-  let date = meetupTime[0].split("-").reverse().join("/");
+  //let date = meetupTime[0].split(" ").reverse().join("/");
+  var date = meetupTime[0];
 
-  let time = meetupTime[1].split(":");
+  var time = meetupTime[1].split(":");
   const hour = time[0] % 12;
 
   time =

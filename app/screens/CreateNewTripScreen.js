@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Alert,
-  ImageBackground,
   KeyboardAvoidingView,
   Pressable,
   StyleSheet,
@@ -9,6 +8,8 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+
+import dayjs from "dayjs";
 
 import { db, collection, addDoc } from "../../firebase";
 
@@ -38,11 +39,20 @@ const CreateNewTripScreen = ({ navigation }) => {
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date(Date.now()));
 
-  //date.toISOString() is known to return date off by one day, to be fixed later
+  //tripDateTime -> human readable string containing trip time
+
+  var dateFormatted = dayjs(date).format();
+  var timeFormatted = dayjs(time).format();
+
   const tripDateTime =
-    date.toISOString().split("T")[0] + " " + time.toTimeString();
+    dateFormatted.split("T")[0].split("-").reverse().join("/") +
+    " " +
+    timeFormatted.split("T")[1];
 
   const epochTime = DateTimeFormatter(date, time);
+
+  //console.log(tripDateTime);
+  //console.log(epochTime.valueOf());
 
   const [destination, setDestination] = useState("");
   const [meetupPoint, setMeetupPoint] = useState("");
@@ -50,35 +60,28 @@ const CreateNewTripScreen = ({ navigation }) => {
   const [coTravellers, setCoTravellers] = useState(0);
   const [otherInfo, setOtherInfo] = useState("");
 
+  const handleAlerts = (fieldName) => {
+    Alert.alert(
+      fieldName + " cannot be blank",
+      "Please add a " + fieldName.toLowerCase(),
+      [
+        {
+          text: "OK",
+          style: "cancel",
+        },
+      ],
+      { cancelable: true }
+    );
+    return false;
+  };
+
   const validateInput = () => {
     //Other validations -> time of meeting to be checked for past input
     if (destination.trim() === "") {
-      Alert.alert(
-        "Destination cannot be blank",
-        "Please add a destination",
-        [
-          {
-            text: "OK",
-            style: "cancel",
-          },
-        ],
-        { cancelable: true }
-      );
-      return false;
+      return handleAlerts("Destination");
     }
     if (meetupPoint.trim() === "") {
-      Alert.alert(
-        "Meetup point cannot be blank",
-        "Please add a meet up point",
-        [
-          {
-            text: "OK",
-            style: "cancel",
-          },
-        ],
-        { cancelable: true }
-      );
-      return false;
+      return handleAlerts("Meetup Point");
     }
     return true;
   };
@@ -87,17 +90,21 @@ const CreateNewTripScreen = ({ navigation }) => {
     if (validateInput()) {
       //console.log(destination);
       try {
-        const docRef = await addDoc(collection(db, "trips"), {
-          userName: user.displayName,
-          userID: user.uid,
-          destination: destination.trim().toLowerCase(),
-          dateTime_HR: tripDateTime,
-          dateTime: epochTime.valueOf(),
-          meetupPoint: meetupPoint.trim().toLowerCase(),
-          vehicle: vehicle.trim().toLowerCase(),
-          coTravellers: coTravellers.trim().toLowerCase(),
-          otherInfo: otherInfo.trim(),
-        });
+        const docRef = await addDoc(
+          collection(db, user.displayName.split("|")[1]),
+          {
+            userName: user.displayName,
+            userID: user.uid,
+            destination: destination.trim().toLowerCase(),
+            dateTime_HR: tripDateTime,
+            dateTime: epochTime.valueOf(),
+            meetupPoint: meetupPoint.trim().toLowerCase(),
+            vehicle: vehicle.trim().toLowerCase(),
+            coTravellers: coTravellers.trim().toLowerCase(),
+            otherInfo: otherInfo.trim(),
+            isVisible: true,
+          }
+        );
         console.log("Document written with ID: ", docRef.id);
         setDestination("");
         setMeetupPoint("");
