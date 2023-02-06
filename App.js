@@ -1,14 +1,12 @@
 import "react-native-gesture-handler";
 
-import { LogBox, Pressable, StatusBar } from "react-native";
+import { LogBox, Pressable, StatusBar, Platform } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import { useFonts } from "expo-font";
-
-import { FontAwesome5 } from "@expo/vector-icons";
 
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import ChoosePathScreen from "./app/screens/ChoosePathScreen";
@@ -20,29 +18,19 @@ import LoginScreen from "./app/screens/LoginScreen";
 import colors from "./app/config/colors";
 import ProfileScreen from "./app/screens/ProfileScreen";
 import fonts from "./app/config/fonts";
+import BackButton from "./app/components/BackButton";
+import ProfileButton from "./app/components/ProfileButton";
 
 const Stack = createStackNavigator();
 
 // Choose Path Screen nests drawer into stack default stack navigator
 const Drawer = createDrawerNavigator();
 
-function OptionsButton(props) {
-  return (
-    <Pressable
-      onPress={() => {
-        props.navigation.navigate(strings.profileScreen);
-      }}
-      style={{ paddingRight: 20 }}
-    >
-      <FontAwesome5 name="user-circle" size={22} color="black" />
-    </Pressable>
-  );
-}
-
 function DrawerNavigation() {
   return (
     <Drawer.Navigator
       initialRouteName={strings.choosePathScreen}
+      backBehavior="history"
       screenOptions={{
         headerStyle: {
           backgroundColor: colors.secondary,
@@ -51,7 +39,8 @@ function DrawerNavigation() {
           fontFamily: fonts.secondry,
         },
         headerTitleAlign: "center",
-        headerStatusBarHeight: StatusBar.currentHeight,
+        //headerStatusBarHeight: StatusBar.currentHeight,
+        swipeEnabled: true,
         drawerPosition: "left",
         drawerActiveTintColor: colors.primary,
         drawerStyle: {
@@ -74,32 +63,30 @@ function DrawerNavigation() {
           drawerItemStyle: {
             display: "none",
           },
-          headerRight: () => <OptionsButton navigation={navigation} />,
+          headerRight: () => <ProfileButton navigation={navigation} />,
         })}
       />
       <Drawer.Screen
         name={strings.viewTripsScreen}
         component={ViewTripsScreen}
         options={({ navigation }) => ({
-          title: strings.viewTripsScreen,
-          headerRight: () => <OptionsButton navigation={navigation} />,
+          headerRight: () => <ProfileButton navigation={navigation} />,
         })}
       />
       <Drawer.Screen
         name={strings.createNewTripsScreen}
         component={CreateNewTripsScreen}
         options={({ navigation }) => ({
-          headerStyle: {
-            backgroundColor: colors.secondary,
-          },
-          headerRight: () => <OptionsButton navigation={navigation} />,
+          headerRight: () => <ProfileButton navigation={navigation} />,
         })}
       />
 
       <Drawer.Screen
         name={strings.profileScreen}
         component={ProfileScreen}
-        options={{ title: strings.profileScreen }}
+        options={({ navigation }) => ({
+          headerLeft: () => <BackButton navigation={navigation} />,
+        })}
       />
     </Drawer.Navigator>
   );
@@ -119,6 +106,10 @@ export default function App() {
 
   return (
     <NavigationContainer>
+      <StatusBar
+        translucent={false}
+        backgroundColor={colors.tertiary}
+      ></StatusBar>
       <Stack.Navigator
         screenOptions={{
           headerTitleAlign: "left",

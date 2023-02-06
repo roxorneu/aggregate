@@ -26,6 +26,7 @@ import DateAndTimePicker from "../components/DateAndTimePicker";
 import DateTimeFormatter from "../utils/DateTimeFormatter";
 import QueryToDocList from "../utils/QueryToDocList";
 import strings from "../config/strings";
+import { StatusBar } from "expo-status-bar";
 
 const ViewTripsScreen = ({ navigation }) => {
   const auth = getAuth();
