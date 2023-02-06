@@ -6,8 +6,6 @@ import {
   View,
 } from "react-native";
 
-import Modal from "react-native-modal";
-
 import { useState } from "react";
 import React from "react";
 
@@ -49,26 +47,17 @@ const Trips = (props) => {
       activeOpacity={0.98}
       onPress={() => setIsExpanded(!isExpanded)}
     >
-      <Modal
-        isVisible={isExpanded}
-        onBackdropPress={closeModal}
-        onBackButtonPress={closeModal}
-        backdropOpacity={0.5}
-        onSwipeComplete={closeModal}
-        useNativeDriverForBackdrop
-        swipeDirection={["down", "up", "right", "left"]}
-      >
-        <ViewTripModal
-          userName={props.userName}
-          destination={props.destination}
-          meetupPoint={props.meetupPoint}
-          meetupTime={displayTime}
-          coTravellers={props.coTravellers}
-          vehicle={props.vehicle}
-          otherInfo={props.otherInfo}
-          closeModal={closeModal}
-        />
-      </Modal>
+      <ViewTripModal
+        isExpanded={isExpanded}
+        closeModal={closeModal}
+        userName={props.userName}
+        destination={props.destination}
+        meetupPoint={props.meetupPoint}
+        meetupTime={displayTime}
+        coTravellers={props.coTravellers}
+        vehicle={props.vehicle}
+        otherInfo={props.otherInfo}
+      />
 
       <View style={styles.arrowIcon}>
         {isExpanded ? (

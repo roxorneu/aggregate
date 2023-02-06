@@ -24,13 +24,13 @@ export default function DateAndTimePicker(props) {
   }
 
   function onDateSelected(event, value) {
-    setDate(value);
     setDatePicker(false);
+    setDate(value);
   }
 
   function onTimeSelected(event, value) {
-    setTime(value);
     setTimePicker(false);
+    setTime(value);
   }
 
   return (

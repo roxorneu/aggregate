@@ -3,6 +3,8 @@ import React from "react";
 
 import { MaterialIcons } from "@expo/vector-icons";
 
+import Modal from "react-native-modal";
+
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 
@@ -12,45 +14,55 @@ const ViewTripModal = (props) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.arrowIcon}>
-        <Pressable
-          onPress={closeModal}
-          style={{ paddingRight: 10, paddingBottom: 4, paddingTop: 10 }}
-        >
-          <MaterialIcons name="keyboard-arrow-up" size={24} color="black" />
-        </Pressable>
-      </View>
-      <View style={styles.infoBoxes}>
-        <Text style={styles.keyStyle}>Going To: </Text>
-        <Text style={styles.propStyle}>{props.destination}</Text>
-      </View>
-      <View style={styles.infoBoxes}>
-        <Text style={styles.keyStyle}>Meetup Time: </Text>
-        <Text style={styles.timePropStyle}>{props.meetupTime}</Text>
-      </View>
+    <Modal
+      isVisible={props.isExpanded}
+      onBackdropPress={closeModal}
+      onBackButtonPress={closeModal}
+      backdropOpacity={0.5}
+      onSwipeComplete={closeModal}
+      useNativeDriverForBackdrop
+      swipeDirection={["down", "up", "right", "left"]}
+    >
+      <View style={styles.container}>
+        <View style={styles.arrowIcon}>
+          <Pressable
+            onPress={closeModal}
+            style={{ paddingRight: 10, paddingBottom: 0, paddingTop: 10 }}
+          >
+            <MaterialIcons name="keyboard-arrow-up" size={24} color="black" />
+          </Pressable>
+        </View>
+        <View style={styles.infoBoxes}>
+          <Text style={styles.keyStyle}>Going To: </Text>
+          <Text style={styles.propStyle}>{props.destination}</Text>
+        </View>
+        <View style={styles.infoBoxes}>
+          <Text style={styles.keyStyle}>Meetup Time: </Text>
+          <Text style={styles.timePropStyle}>{props.meetupTime}</Text>
+        </View>
 
-      <View style={styles.infoBoxes}>
-        <Text style={styles.keyStyle}>Trip Host: </Text>
-        <Text style={styles.propStyle}>{props.userName.split("|")[0]}</Text>
+        <View style={styles.infoBoxes}>
+          <Text style={styles.keyStyle}>Trip Host: </Text>
+          <Text style={styles.propStyle}>{props.userName.split("|")[0]}</Text>
+        </View>
+        <View style={styles.infoBoxes}>
+          <Text style={styles.keyStyle}>Meetup Point: </Text>
+          <Text style={styles.propStyle}>{props.meetupPoint}</Text>
+        </View>
+        <View style={styles.infoBoxes}>
+          <Text style={styles.keyStyle}>Number of Co-Travellers: </Text>
+          <Text style={styles.propStyle}>{props.coTravellers}</Text>
+        </View>
+        <View style={styles.infoBoxes}>
+          <Text style={styles.keyStyle}>Vehicle: </Text>
+          <Text style={styles.propStyle}>{props.vehicle}</Text>
+        </View>
+        <View style={styles.infoBoxes}>
+          <Text style={styles.keyStyle}>Other Info: </Text>
+          <Text style={styles.timePropStyle}>{props.otherInfo}</Text>
+        </View>
       </View>
-      <View style={styles.infoBoxes}>
-        <Text style={styles.keyStyle}>Meetup Point: </Text>
-        <Text style={styles.propStyle}>{props.meetupPoint}</Text>
-      </View>
-      <View style={styles.infoBoxes}>
-        <Text style={styles.keyStyle}>Number of Co-Travellers: </Text>
-        <Text style={styles.propStyle}>{props.coTravellers}</Text>
-      </View>
-      <View style={styles.infoBoxes}>
-        <Text style={styles.keyStyle}>Vehicle: </Text>
-        <Text style={styles.propStyle}>{props.vehicle}</Text>
-      </View>
-      <View style={styles.infoBoxes}>
-        <Text style={styles.keyStyle}>Other Info: </Text>
-        <Text style={styles.timePropStyle}>{props.otherInfo}</Text>
-      </View>
-    </View>
+    </Modal>
   );
 };
 
