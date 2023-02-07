@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 
 import { MaterialIcons } from "@expo/vector-icons";
@@ -25,12 +25,12 @@ const ViewTripModal = (props) => {
     >
       <View style={styles.container}>
         <View style={styles.arrowIcon}>
-          <Pressable
+          <TouchableOpacity
             onPress={closeModal}
             style={{ paddingRight: 10, paddingBottom: 0, paddingTop: 10 }}
           >
             <MaterialIcons name="keyboard-arrow-up" size={24} color="black" />
-          </Pressable>
+          </TouchableOpacity>
         </View>
         <View style={styles.infoBoxes}>
           <Text style={styles.keyStyle}>Going To: </Text>

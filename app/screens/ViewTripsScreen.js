@@ -4,12 +4,9 @@ import {
   RefreshControl,
   SafeAreaView,
   StyleSheet,
-  Text,
   ToastAndroid,
-  TouchableOpacity,
-  View,
 } from "react-native";
-import React from "react";
+import React, { useCallback } from "react";
 
 import { useEffect, useState } from "react";
 
@@ -17,10 +14,11 @@ import { db, collection, getDocs, query, where, getAuth } from "../../firebase";
 
 import colors from "../config/colors";
 import fonts from "../config/fonts";
+import strings from "../config/strings";
+
 import Trips from "../components/Trips";
 import DateTimeFormatter from "../utils/DateTimeFormatter";
 import QueryToDocList from "../utils/QueryToDocList";
-import strings from "../config/strings";
 import DestinationFilterModal from "../components/DestinationFilterModal";
 import TimeFilterModal from "../components/TimeFilterModal";
 import FiltersBar from "../components/FiltersBar";
@@ -75,23 +73,25 @@ const ViewTripsScreen = ({ navigation }) => {
     return false;
   };
 
-  const handleDestinationFiltering = async () => {
+  const handleDestinationFiltering = () => {
     setFilterDestination(false);
+    console.log(tripDestination);
 
     if (tripDestination.trim() === "") {
       return;
     }
 
-    const q = query(
-      collection(db, collectionByCity),
-      where("destination", "==", tripDestination.toLowerCase().trim())
-    );
-    const querySnapshot = await getDocs(q);
-    const tempList = [];
-    QueryToDocList(querySnapshot, tempList);
-
     setTripDestination("");
 
+    var tempList = [];
+
+    for (let i = 0; i < tripsList.length; i++) {
+      if (tripsList[i].destination === tripDestination.toLowerCase().trim()) {
+        console.log(tripsList[i].meetupTime_epoch);
+        tempList.push(tripsList[i]);
+      }
+    }
+
     if (tempList.length === 0) {
       return handleEmptyList();
     }
@@ -99,23 +99,44 @@ const ViewTripsScreen = ({ navigation }) => {
     ToastAndroid.show("Pull down to reset filter", 2000);
   };
 
-  const handleTimeFiltering = async () => {
+  const handleTimeFiltering = () => {
     setFilterTime(false);
-    const q = query(
-      collection(db, collectionByCity),
-      where("dateTime", ">=", DateTimeFormatter(fromDate, fromTime).valueOf()),
-      where("dateTime", "<=", DateTimeFormatter(toDate, toTime).valueOf())
-    );
-    const querySnapshot = await getDocs(q);
-    const tempList = [];
-    QueryToDocList(querySnapshot, tempList);
 
+    var tempList = [];
+
+    var from = DateTimeFormatter(fromDate, fromTime).valueOf();
+    var to = DateTimeFormatter(toDate, toTime).valueOf();
+
+    for (let i = 0; i < tripsList.length; i++) {
+      if (
+        tripsList[i].meetupTime_epoch >= from &&
+        tripsList[i].meetupTime_epoch <= to
+      ) {
+        //console.log(tripsList[i].meetupTime_epoch);
+        tempList.push(tripsList[i]);
+      }
+    }
     if (tempList.length === 0) {
       return handleEmptyList();
     }
     setTripsList(tempList);
     ToastAndroid.show("Pull down to reset filter", 2000);
   };
+
+  const renderItem = useCallback(
+    ({ item }) => (
+      <Trips
+        userName={item.userName}
+        destination={item.destination}
+        meetupPoint={item.meetupPoint}
+        meetupTime={item.meetupTime}
+        coTravellers={item.coTravellers}
+        vehicle={item.vehicle}
+        otherInfo={item.otherInfo}
+      />
+    ),
+    []
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -153,18 +174,9 @@ const ViewTripsScreen = ({ navigation }) => {
           style={styles.listStyle}
           numColumns={2}
           data={tripsList}
-          renderItem={({ item }) => (
-            <Trips
-              userName={item.userName}
-              destination={item.destination}
-              meetupPoint={item.meetupPoint}
-              meetupTime={item.meetupTime}
-              coTravellers={item.coTravellers}
-              vehicle={item.vehicle}
-              otherInfo={item.otherInfo}
-            />
-          )}
+          renderItem={renderItem}
           keyExtractor={(item) => item.id}
+          initialNumToRender={10}
           refreshControl={
             <RefreshControl
               refreshing={refreshing}

@@ -35,7 +35,7 @@ const RegisterScreen = ({ navigation }) => {
       })
       .then(() => {
         updateProfile(auth.currentUser, {
-          displayName: username + "|" + location,
+          displayName: username.trim() + "|" + location.trim(),
           photoURL: "",
         }).then(() => {
           //console.log("Updated name and location");

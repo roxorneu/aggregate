@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 
@@ -54,11 +60,11 @@ export default function DateAndTimePicker(props) {
           )}
 
           {!datePicker && (
-            <Pressable onPress={showDatePicker}>
+            <TouchableOpacity onPress={() => showDatePicker()}>
               <View style={format.buttons}>
                 <Text style={format.buttonText}>Update</Text>
               </View>
-            </Pressable>
+            </TouchableOpacity>
           )}
         </View>
       </View>
@@ -78,7 +84,7 @@ export default function DateAndTimePicker(props) {
           )}
 
           {!timePicker && (
-            <Pressable onPress={showTimePicker}>
+            <Pressable onPress={() => showTimePicker()}>
               <View style={format.buttons}>
                 <Text style={format.buttonText}>Update</Text>
               </View>
