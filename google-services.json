@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "216515473668",
+    "project_id": "aggregate-41f8a",
+    "storage_bucket": "aggregate-41f8a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216515473668:android:460e170c979e8936276051",
+        "android_client_info": {
+          "package_name": "com.roxorneo.aggregate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "216515473668-ffqf1avs8ulu25dq9m51mcns7edn5b84.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKkpEIZgg9Qy9MZgI6izdTEYUvaQcIEMM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "216515473668-ffqf1avs8ulu25dq9m51mcns7edn5b84.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

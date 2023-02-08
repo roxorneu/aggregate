@@ -44,6 +44,7 @@ const Trips = (props) => {
       <ViewTripModal
         isExpanded={isExpanded}
         closeModal={closeModal}
+        userID={props.userID}
         userName={props.userName}
         destination={props.destination}
         meetupPoint={props.meetupPoint}
@@ -51,6 +52,7 @@ const Trips = (props) => {
         coTravellers={props.coTravellers}
         vehicle={props.vehicle}
         otherInfo={props.otherInfo}
+        viewerName={props.viewerName}
       />
 
       <View style={styles.arrowIcon}>

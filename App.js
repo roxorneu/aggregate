@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 
-import { LogBox, Pressable, StatusBar, Platform } from "react-native";
+import { LogBox, StatusBar } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -92,7 +92,7 @@ function DrawerNavigation() {
   );
 }
 
-export default function App() {
+const App = () => {
   LogBox.ignoreAllLogs();
 
   const [fontsLoaded] = useFonts({
@@ -158,4 +158,6 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+export default App;

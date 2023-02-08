@@ -8,6 +8,9 @@ import {
   getDocs,
   query,
   where,
+  doc,
+  setDoc,
+  getDoc,
 } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -57,4 +60,7 @@ export {
   getDocs,
   query,
   where,
+  doc,
+  setDoc,
+  getDoc,
 };

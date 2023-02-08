@@ -8,8 +8,25 @@ import Modal from "react-native-modal";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 
+import { useState } from "react";
+
+import SendInterestNotification from "../utils/SendInterestNotification";
+
 const ViewTripModal = (props) => {
+  const [interested, setInterested] = useState(false);
+
+  const handleInterest = () => {
+    setInterested(!interested);
+  };
+
   const closeModal = () => {
+    if (interested) {
+      SendInterestNotification(
+        props.userID,
+        props.viewerName,
+        props.destination
+      );
+    }
     props.closeModal();
   };
 
@@ -61,6 +78,16 @@ const ViewTripModal = (props) => {
           <Text style={styles.keyStyle}>Other Info: </Text>
           <Text style={styles.timePropStyle}>{props.otherInfo}</Text>
         </View>
+        <TouchableOpacity
+          style={styles.interestBox}
+          onPress={() => handleInterest()}
+        >
+          {interested ? (
+            <Text style={styles.interestText}> Interested! </Text>
+          ) : (
+            <Text style={styles.interestText}> Interested? </Text>
+          )}
+        </TouchableOpacity>
       </View>
     </Modal>
   );
@@ -115,5 +142,20 @@ const styles = StyleSheet.create({
   timePropStyle: {
     fontFamily: fonts.tertiary,
     width: "68%",
+  },
+
+  interestBox: {
+    backgroundColor: colors.primary,
+    alignSelf: "center",
+    width: "60%",
+    borderRadius: 15,
+    margin: 10,
+    padding: 8,
+  },
+
+  interestText: {
+    fontFamily: fonts.secondry,
+    fontSize: 18,
+    alignSelf: "center",
   },
 });

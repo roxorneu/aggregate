@@ -34,6 +34,7 @@ const ViewTripsScreen = ({ navigation }) => {
   const [filterTime, setFilterTime] = useState(false);
 
   const collectionByCity = user.displayName.split("|")[1];
+  const viewerName = user.displayName.split("|")[0];
 
   const getTrips = async () => {
     //Single query with for all data chosen over multiple queries within modal etc.
@@ -80,7 +81,6 @@ const ViewTripsScreen = ({ navigation }) => {
     if (tripDestination.trim() === "") {
       return;
     }
-
     setTripDestination("");
 
     var tempList = [];
@@ -112,7 +112,6 @@ const ViewTripsScreen = ({ navigation }) => {
         tripsList[i].meetupTime_epoch >= from &&
         tripsList[i].meetupTime_epoch <= to
       ) {
-        //console.log(tripsList[i].meetupTime_epoch);
         tempList.push(tripsList[i]);
       }
     }
@@ -126,6 +125,7 @@ const ViewTripsScreen = ({ navigation }) => {
   const renderItem = useCallback(
     ({ item }) => (
       <Trips
+        userID={item.userID}
         userName={item.userName}
         destination={item.destination}
         meetupPoint={item.meetupPoint}
@@ -133,6 +133,7 @@ const ViewTripsScreen = ({ navigation }) => {
         coTravellers={item.coTravellers}
         vehicle={item.vehicle}
         otherInfo={item.otherInfo}
+        viewerName={viewerName}
       />
     ),
     []

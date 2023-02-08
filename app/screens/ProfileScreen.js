@@ -17,6 +17,8 @@ const ProfileScreen = ({ navigation }) => {
   const auth = getAuth();
   const user = auth.currentUser;
 
+  //console.log(user);
+
   if (user) {
     // User is signed in
     //console.log(user.phoneNumber);

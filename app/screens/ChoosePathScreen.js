@@ -4,7 +4,9 @@ import colors from "../config/colors";
 import fonts from "../config/fonts";
 import strings from "../config/strings";
 
-const ChoosePathScreen = ({ navigation }) => {
+const ChoosePathScreen = ({ route, navigation }) => {
+  //const { expoPushToken } = route.params;
+
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity

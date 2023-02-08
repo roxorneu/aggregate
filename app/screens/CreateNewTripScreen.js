@@ -11,11 +11,9 @@ import {
 
 import dayjs from "dayjs";
 
-import { db, collection, addDoc } from "../../firebase";
+import { db, collection, addDoc, getAuth, doc, setDoc } from "../../firebase";
 
 import { useState } from "react";
-
-import { getAuth } from "../../firebase";
 
 import DateAndTimePicker from "../components/DateAndTimePicker";
 
@@ -24,7 +22,14 @@ import fonts from "../config/fonts";
 import strings from "../config/strings";
 import DateTimeFormatter from "../utils/DateTimeFormatter";
 
+import {
+  NotificationsInit,
+  sendPushNotification,
+} from "../utils/NotificationsInit";
+
 const CreateNewTripScreen = ({ navigation }) => {
+  var x = NotificationsInit();
+
   const auth = getAuth();
   const user = auth.currentUser;
 
@@ -104,13 +109,22 @@ const CreateNewTripScreen = ({ navigation }) => {
             otherInfo: otherInfo.trim(),
             isVisible: true,
           }
-        );
+        ).then(() => {
+          const added = setDoc(doc(db, "users", user.uid), {
+            expoPushToken: x,
+          });
+        });
         //console.log("Document written with ID: ", docRef.id);
         setDestination("");
         setMeetupPoint("");
         setVehicle("");
         setCoTravellers(0);
         setOtherInfo("");
+        sendPushNotification(
+          x,
+          "Successfully Added Trip",
+          "Your trip to " + destination + " has been successfully added!"
+        );
         navigation.navigate(strings.viewTripsScreen);
       } catch (e) {
         console.error("Error adding document: ", e);
