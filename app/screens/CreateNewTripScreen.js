@@ -110,6 +110,7 @@ const CreateNewTripScreen = ({ navigation }) => {
             isVisible: true,
           }
         ).then(() => {
+          // Creating a new trip with a new device will overwrite token of old device
           const added = setDoc(doc(db, "users", user.uid), {
             expoPushToken: x,
           });
