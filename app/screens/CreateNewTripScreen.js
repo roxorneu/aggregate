@@ -28,7 +28,8 @@ import {
 } from "../utils/NotificationsInit";
 
 const CreateNewTripScreen = ({ navigation }) => {
-  var x = NotificationsInit();
+  var token = NotificationsInit();
+  console.log(token);
 
   const auth = getAuth();
   const user = auth.currentUser;
@@ -112,7 +113,7 @@ const CreateNewTripScreen = ({ navigation }) => {
         ).then(() => {
           // Creating a new trip with a new device will overwrite token of old device
           const added = setDoc(doc(db, "users", user.uid), {
-            expoPushToken: x,
+            expoPushToken: token,
           });
         });
         //console.log("Document written with ID: ", docRef.id);
@@ -122,7 +123,7 @@ const CreateNewTripScreen = ({ navigation }) => {
         setCoTravellers(0);
         setOtherInfo("");
         sendPushNotification(
-          x,
+          token,
           "Successfully Added Trip",
           "Your trip to " + destination + " has been successfully added!"
         );

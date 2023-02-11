@@ -125,6 +125,7 @@ const ViewTripsScreen = ({ navigation }) => {
   const renderItem = useCallback(
     ({ item }) => (
       <Trips
+        tripID={item.id}
         userID={item.userID}
         userName={item.userName}
         destination={item.destination}

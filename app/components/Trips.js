@@ -44,6 +44,7 @@ const Trips = (props) => {
       <ViewTripModal
         isExpanded={isExpanded}
         closeModal={closeModal}
+        tripID={props.tripID}
         userID={props.userID}
         userName={props.userName}
         destination={props.destination}
