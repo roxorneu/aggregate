@@ -2,11 +2,16 @@
 // notification to trip host is handled by backend as well
 
 import { getAuth } from "../../firebase";
-import { BASE_URL } from "@env";
+import { SERVER, TRIP_UPDATE_URL, USER_UPDATE_URL } from "@env";
 
 import axios from "axios";
 
-async function updateInterestAndNotification(tripID, userName, destination) {
+async function updateInterestAndNotification(
+  userID,
+  tripID,
+  userName,
+  destination
+) {
   const auth = getAuth();
   const user = auth.currentUser;
 
@@ -15,16 +20,32 @@ async function updateInterestAndNotification(tripID, userName, destination) {
 
   const message = {
     tripID: tripID,
+    userID: userID,
     userName: userName,
     destination: destination,
     interestedUsers: viewerID,
+    interestedUserName: user.displayName.split("|")[0],
   };
 
   try {
-    await axios.post(BASE_URL, message);
+    await axios.post(SERVER + TRIP_UPDATE_URL, message);
   } catch (err) {
     console.log(err);
   }
 }
 
-export { updateInterestAndNotification };
+async function updateUserToken(userID, userName, token) {
+  const message = {
+    userID: userID,
+    userName: userName,
+    token: token,
+  };
+
+  try {
+    await axios.post(SERVER + USER_UPDATE_URL, message);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export { updateInterestAndNotification, updateUserToken };

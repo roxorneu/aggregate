@@ -10,7 +10,6 @@ import fonts from "../config/fonts";
 
 import { useState } from "react";
 
-import SendInterestNotification from "../utils/SendInterestNotification";
 import { updateInterestAndNotification } from "../utils/ServerFunctions";
 
 const ViewTripModal = (props) => {
@@ -22,20 +21,12 @@ const ViewTripModal = (props) => {
 
   const closeModal = () => {
     if (interested) {
-      var t0 = performance.now();
-      //console.log(props);
-      SendInterestNotification(
-        props.userID,
-        props.viewerName,
-        props.destination
-      );
       updateInterestAndNotification(
+        props.userID,
         props.tripID,
         props.userName.split("|")[0],
         props.destination
       );
-      var t1 = performance.now();
-      console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.");
     }
     props.closeModal();
   };

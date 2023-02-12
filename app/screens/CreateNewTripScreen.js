@@ -26,6 +26,7 @@ import {
   NotificationsInit,
   sendPushNotification,
 } from "../utils/NotificationsInit";
+import { updateUserToken } from "../utils/ServerFunctions";
 
 const CreateNewTripScreen = ({ navigation }) => {
   var token = NotificationsInit();
@@ -115,6 +116,7 @@ const CreateNewTripScreen = ({ navigation }) => {
           const added = setDoc(doc(db, "users", user.uid), {
             expoPushToken: token,
           });
+          updateUserToken(user.uid, user.displayName, token);
         });
         //console.log("Document written with ID: ", docRef.id);
         setDestination("");
