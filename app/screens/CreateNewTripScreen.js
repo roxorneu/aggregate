@@ -26,11 +26,13 @@ import {
   NotificationsInit,
   sendPushNotification,
 } from "../utils/NotificationsInit";
-import { updateUserToken } from "../utils/ServerFunctions";
+import {
+  updateUserToken,
+  tripCreatedNotification,
+} from "../utils/ServerFunctions";
 
 const CreateNewTripScreen = ({ navigation }) => {
   var token = NotificationsInit();
-  console.log(token);
 
   const auth = getAuth();
   const user = auth.currentUser;
@@ -57,9 +59,6 @@ const CreateNewTripScreen = ({ navigation }) => {
     timeFormatted.split("T")[1];
 
   const epochTime = DateTimeFormatter(date, time);
-
-  //console.log(tripDateTime);
-  //console.log(epochTime.valueOf());
 
   const [destination, setDestination] = useState("");
   const [meetupPoint, setMeetupPoint] = useState("");
@@ -113,22 +112,17 @@ const CreateNewTripScreen = ({ navigation }) => {
           }
         ).then(() => {
           // Creating a new trip with a new device will overwrite token of old device
-          const added = setDoc(doc(db, "users", user.uid), {
-            expoPushToken: token,
-          });
           updateUserToken(user.uid, user.displayName, token);
         });
-        //console.log("Document written with ID: ", docRef.id);
+
         setDestination("");
         setMeetupPoint("");
         setVehicle("");
         setCoTravellers(0);
         setOtherInfo("");
-        sendPushNotification(
-          token,
-          "Successfully Added Trip",
-          "Your trip to " + destination + " has been successfully added!"
-        );
+
+        tripCreatedNotification(token, destination.trim());
+
         navigation.navigate(strings.viewTripsScreen);
       } catch (e) {
         console.error("Error adding document: ", e);

@@ -1,7 +1,7 @@
-import dayjs from "dayjs";
-
 // Takes in DateTimePicker output and separates date and time components selected by user
 // returns new Date in IST merging above inputs
+
+import dayjs from "dayjs";
 
 const DateTimeFormatter = (date, time) => {
   var dateFormatted = dayjs(date).format();
