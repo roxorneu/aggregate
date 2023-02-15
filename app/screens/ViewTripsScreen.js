@@ -149,27 +149,31 @@ const ViewTripsScreen = ({ navigation }) => {
         setFilterTime={setFilterTime}
       />
 
-      <DestinationFilterModal
-        filterDestination={filterDestination}
-        setFilterDestination={setFilterDestination}
-        tripDestination={tripDestination}
-        setTripDestination={setTripDestination}
-        handleDestinationFiltering={handleDestinationFiltering}
-      />
+      {filterDestination ? (
+        <DestinationFilterModal
+          filterDestination={filterDestination}
+          setFilterDestination={setFilterDestination}
+          tripDestination={tripDestination}
+          setTripDestination={setTripDestination}
+          handleDestinationFiltering={handleDestinationFiltering}
+        />
+      ) : null}
 
-      <TimeFilterModal
-        filterTime={filterTime}
-        setFilterTime={setFilterTime}
-        fromDate={fromDate}
-        setFromDate={setFromDate}
-        fromTime={fromTime}
-        setFromTime={setFromTime}
-        toDate={toDate}
-        setToDate={setToDate}
-        toTime={toTime}
-        setToTime={setToTime}
-        handleTimeFiltering={handleTimeFiltering}
-      />
+      {filterTime ? (
+        <TimeFilterModal
+          filterTime={filterTime}
+          setFilterTime={setFilterTime}
+          fromDate={fromDate}
+          setFromDate={setFromDate}
+          fromTime={fromTime}
+          setFromTime={setFromTime}
+          toDate={toDate}
+          setToDate={setToDate}
+          toTime={toTime}
+          setToTime={setToTime}
+          handleTimeFiltering={handleTimeFiltering}
+        />
+      ) : null}
 
       {tripsList.length >= 0 ? (
         <FlatList

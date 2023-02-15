@@ -10,35 +10,39 @@ import fonts from "../config/fonts";
 
 const TimeFilterModal = (props) => {
   return (
-    <Modal
-      isVisible={props.filterTime}
-      onBackdropPress={() => props.setFilterTime(false)}
-      onBackButtonPress={() => props.setFilterTime(false)}
-      backdropOpacity={0.5}
-    >
-      <View style={styles.modalFilterBox}>
-        <Text style={styles.modalTimeFilterText}>Please set a range</Text>
+    <View>
+      {props.filterTime ? (
+        <Modal
+          isVisible={props.filterTime}
+          onBackdropPress={() => props.setFilterTime(false)}
+          onBackButtonPress={() => props.setFilterTime(false)}
+          backdropOpacity={0.5}
+        >
+          <View style={styles.modalFilterBox}>
+            <Text style={styles.modalTimeFilterText}>Please set a range</Text>
 
-        <DateAndTimePicker
-          date={props.fromDate}
-          setDate={props.setFromDate}
-          time={props.fromTime}
-          setTime={props.setFromTime}
-          title="From"
-        />
+            <DateAndTimePicker
+              date={props.fromDate}
+              setDate={props.setFromDate}
+              time={props.fromTime}
+              setTime={props.setFromTime}
+              title="From"
+            />
 
-        <DateAndTimePicker
-          date={props.toDate}
-          setDate={props.setToDate}
-          time={props.toTime}
-          setTime={props.setToTime}
-          title="To"
-        />
-        <Pressable onPress={props.handleTimeFiltering}>
-          <Text style={styles.modalSubmitButton}>Filter!</Text>
-        </Pressable>
-      </View>
-    </Modal>
+            <DateAndTimePicker
+              date={props.toDate}
+              setDate={props.setToDate}
+              time={props.toTime}
+              setTime={props.setToTime}
+              title="To"
+            />
+            <Pressable onPress={props.handleTimeFiltering}>
+              <Text style={styles.modalSubmitButton}>Filter!</Text>
+            </Pressable>
+          </View>
+        </Modal>
+      ) : null}
+    </View>
   );
 };
 

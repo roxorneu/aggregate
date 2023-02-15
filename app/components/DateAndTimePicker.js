@@ -47,7 +47,7 @@ export default function DateAndTimePicker(props) {
         <Text style={format.text}>{dayjs(date).format("DD MMM YYYY")} </Text>
 
         <View>
-          {datePicker && (
+          {datePicker ? (
             <RNDateTimePicker
               value={date}
               mode={"date"}
@@ -57,15 +57,15 @@ export default function DateAndTimePicker(props) {
               maximumDate={new Date(Date.now() + 15 * 86400000)}
               onChange={onDateSelected}
             />
-          )}
+          ) : null}
 
-          {!datePicker && (
+          {!datePicker ? (
             <TouchableOpacity onPress={() => showDatePicker()}>
               <View style={format.buttons}>
                 <Text style={format.buttonText}>Update</Text>
               </View>
             </TouchableOpacity>
-          )}
+          ) : null}
         </View>
       </View>
 
@@ -73,7 +73,7 @@ export default function DateAndTimePicker(props) {
         <Text style={format.text}>{dayjs(time).format("hh:mm A")} </Text>
 
         <View>
-          {timePicker && (
+          {timePicker ? (
             <RNDateTimePicker
               value={time}
               mode={"time"}
@@ -81,15 +81,15 @@ export default function DateAndTimePicker(props) {
               is24Hour={false}
               onChange={onTimeSelected}
             />
-          )}
+          ) : null}
 
-          {!timePicker && (
+          {!timePicker ? (
             <Pressable onPress={() => showTimePicker()}>
               <View style={format.buttons}>
                 <Text style={format.buttonText}>Update</Text>
               </View>
             </Pressable>
-          )}
+          ) : null}
         </View>
       </View>
     </View>

@@ -8,25 +8,29 @@ import fonts from "../config/fonts";
 
 const DestinationFilterModal = (props) => {
   return (
-    <Modal
-      isVisible={props.filterDestination}
-      onBackdropPress={() => props.setFilterDestination(false)}
-      onBackButtonPress={() => props.setFilterDestination(false)}
-      backdropOpacity={0.5}
-    >
-      <View style={styles.modalFilterBox}>
-        <TextInput
-          style={styles.modalDestinationInput}
-          placeholder="Enter your destination"
-          value={props.tripDestination}
-          onChangeText={(text) => props.setTripDestination(text)}
-        />
+    <View>
+      {props.filterDestination ? (
+        <Modal
+          isVisible={props.filterDestination}
+          onBackdropPress={() => props.setFilterDestination(false)}
+          onBackButtonPress={() => props.setFilterDestination(false)}
+          backdropOpacity={0.5}
+        >
+          <View style={styles.modalFilterBox}>
+            <TextInput
+              style={styles.modalDestinationInput}
+              placeholder="Enter your destination"
+              value={props.tripDestination}
+              onChangeText={(text) => props.setTripDestination(text)}
+            />
 
-        <Pressable onPress={props.handleDestinationFiltering}>
-          <Text style={styles.modalSubmitButton}>Filter!</Text>
-        </Pressable>
-      </View>
-    </Modal>
+            <Pressable onPress={props.handleDestinationFiltering}>
+              <Text style={styles.modalSubmitButton}>Filter!</Text>
+            </Pressable>
+          </View>
+        </Modal>
+      ) : null}
+    </View>
   );
 };
 

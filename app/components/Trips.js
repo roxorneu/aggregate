@@ -41,20 +41,22 @@ const Trips = (props) => {
       activeOpacity={0.98}
       onPress={() => setIsExpanded(!isExpanded)}
     >
-      <ViewTripModal
-        isExpanded={isExpanded}
-        closeModal={closeModal}
-        tripID={props.tripID}
-        userID={props.userID}
-        userName={props.userName}
-        destination={props.destination}
-        meetupPoint={props.meetupPoint}
-        meetupTime={displayTime}
-        coTravellers={props.coTravellers}
-        vehicle={props.vehicle}
-        otherInfo={props.otherInfo}
-        viewerName={props.viewerName}
-      />
+      {isExpanded ? (
+        <ViewTripModal
+          isExpanded={isExpanded}
+          closeModal={closeModal}
+          tripID={props.tripID}
+          userID={props.userID}
+          userName={props.userName}
+          destination={props.destination}
+          meetupPoint={props.meetupPoint}
+          meetupTime={displayTime}
+          coTravellers={props.coTravellers}
+          vehicle={props.vehicle}
+          otherInfo={props.otherInfo}
+          viewerName={props.viewerName}
+        />
+      ) : null}
 
       <View style={styles.arrowIcon}>
         {isExpanded ? (
