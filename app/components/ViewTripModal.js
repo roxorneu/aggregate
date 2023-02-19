@@ -7,33 +7,63 @@ import {
 } from "react-native";
 import React from "react";
 
-import { MaterialIcons, AntDesign } from "@expo/vector-icons";
+import { MaterialIcons, Octicons } from "@expo/vector-icons";
+import { getAuth } from "../../firebase";
 
 import Modal from "react-native-modal";
 
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 import { updateInterestAndNotification } from "../utils/ServerFunctions";
-import { prototype } from "react-native/Libraries/Utilities/PixelRatio";
+import { addToList, removeFromList } from "../redux/interestSlice";
 
 const ViewTripModal = (props) => {
-  const [interested, setInterested] = useState(false);
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const viewerID = user.uid;
+
+  const dispatch = useDispatch();
+
+  const interestedTripsObject = useSelector((state) => state.tripsList);
+  const interestedListForUser = interestedTripsObject[viewerID];
+
+  const isViewerInterested = () => {
+    // if user has no saved interests, state object will return undefined list
+    if (interestedListForUser === undefined) {
+      return false;
+    }
+    if (interestedListForUser.includes(props.tripID)) {
+      return true;
+    }
+    return false;
+  };
+
+  // if trip is saved in state, that means user has expressed interest in the past in the trip
+  const [interested, setInterested] = useState(isViewerInterested());
 
   const handleInterest = () => {
-    setInterested(!interested);
+    setInterested(true);
+  };
+
+  const handleInterestRevoked = () => {
+    setInterested(false);
   };
 
   const closeModal = () => {
     if (interested) {
+      dispatch(addToList({ [viewerID]: props.tripID }));
       updateInterestAndNotification(
         props.userID,
         props.tripID,
         props.userName.split("|")[0],
         props.destination
       );
+    } else {
+      dispatch(removeFromList({ [viewerID]: props.tripID }));
     }
     props.closeModal();
   };
@@ -94,14 +124,15 @@ const ViewTripModal = (props) => {
               <Text style={styles.keyStyle}>Other Info: </Text>
               <Text style={styles.timePropStyle}>{props.otherInfo}</Text>
             </View>
+
             {interested ? (
               <TouchableHighlight
                 underlayColor={colors.secondary}
                 activeOpacity={1}
                 style={styles.interestBoxInterested}
-                onPress={() => handleInterest()}
+                onPress={() => handleInterestRevoked()}
               >
-                <AntDesign name="heart" size={40} color={colors.primary} />
+                <Octicons name="heart-fill" size={60} color={colors.primary} />
               </TouchableHighlight>
             ) : (
               <TouchableHighlight

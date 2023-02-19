@@ -4,4 +4,5 @@ export default {
   tertiary: `#2f4f4f`,
   black: `#000`,
   white: `#ffffff`,
+  pink: `#c71585`,
 };

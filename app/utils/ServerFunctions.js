@@ -21,7 +21,7 @@ async function updateInterestAndNotification(
   const user = auth.currentUser;
 
   const viewerID = user.uid;
-  console.log(viewerID);
+  //console.log(viewerID);
 
   const message = {
     tripID: tripID,
