@@ -2,7 +2,9 @@ import React from "react";
 import {
   Alert,
   KeyboardAvoidingView,
+  View,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -132,63 +134,60 @@ const CreateNewTripScreen = ({ navigation }) => {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <Text style={styles.tripTitleStyle}>
-        {user.displayName.split("|")[0]}'s New Trip
-      </Text>
+      <ScrollView style={{ width: "100%" }}>
+        <Text style={styles.tripTitleStyle}>
+          {user.displayName.split("|")[0]}'s New Trip
+        </Text>
 
-      <TextInput
-        placeholder={strings.cnts_destinationPlaceholder}
-        style={styles.inputBoxes}
-        value={destination}
-        onChangeText={(text) => setDestination(text)}
-      />
-
-      <DateAndTimePicker
-        date={date}
-        setDate={setDate}
-        time={time}
-        setTime={setTime}
-        title={strings.cnts_meetupTimeString}
-      />
-
-      <TextInput
-        placeholder={strings.cnts_meetupPointPlaceholder}
-        style={styles.inputBoxes}
-        value={meetupPoint}
-        onChangeText={(text) => setMeetupPoint(text)}
-      />
-
-      <TextInput
-        placeholder={strings.cnts_vehiclePlaceholder}
-        style={styles.inputBoxes}
-        value={vehicle}
-        onChangeText={(text) => setVehicle(text)}
-      />
-
-      <TextInput
-        placeholder={strings.cnts_coTravellersPlaceholder}
-        style={styles.inputBoxes}
-        value={coTravellers}
-        onChangeText={(text) => setCoTravellers(text.trim())}
-        keyboardType={Platform.OS === "ios" ? "number-pad" : "numeric"}
-      />
-      <TextInput
-        placeholder={strings.cnts_otherInfoPlaceholder}
-        style={styles.inputBoxes}
-        value={otherInfo}
-        onChangeText={(text) => setOtherInfo(text)}
-        numberOfLines={2}
-        multiline={true}
-      />
-
-      <Pressable>
-        <TouchableOpacity onPress={handleSubmitTrip}>
-          <Text style={styles.submitButton}>
-            {" "}
-            {strings.cnts_submitTripButtonText}{" "}
-          </Text>
-        </TouchableOpacity>
-      </Pressable>
+        <TextInput
+          placeholder={strings.cnts_destinationPlaceholder}
+          style={styles.inputBoxes}
+          value={destination}
+          onChangeText={(text) => setDestination(text)}
+        />
+        <DateAndTimePicker
+          date={date}
+          setDate={setDate}
+          time={time}
+          setTime={setTime}
+          title={strings.cnts_meetupTimeString}
+        />
+        <TextInput
+          placeholder={strings.cnts_meetupPointPlaceholder}
+          style={styles.inputBoxes}
+          value={meetupPoint}
+          onChangeText={(text) => setMeetupPoint(text)}
+        />
+        <TextInput
+          placeholder={strings.cnts_vehiclePlaceholder}
+          style={styles.inputBoxes}
+          value={vehicle}
+          onChangeText={(text) => setVehicle(text)}
+        />
+        <TextInput
+          placeholder={strings.cnts_coTravellersPlaceholder}
+          style={styles.inputBoxes}
+          value={coTravellers}
+          onChangeText={(text) => setCoTravellers(text.trim())}
+          keyboardType={Platform.OS === "ios" ? "number-pad" : "numeric"}
+        />
+        <TextInput
+          placeholder={strings.cnts_otherInfoPlaceholder}
+          style={styles.inputBoxes}
+          value={otherInfo}
+          onChangeText={(text) => setOtherInfo(text)}
+          numberOfLines={2}
+          multiline={true}
+        />
+        <Pressable>
+          <TouchableOpacity onPress={handleSubmitTrip}>
+            <Text style={styles.submitButton}>
+              {" "}
+              {strings.cnts_submitTripButtonText}{" "}
+            </Text>
+          </TouchableOpacity>
+        </Pressable>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
@@ -220,8 +219,10 @@ const styles = StyleSheet.create({
   tripTitleStyle: {
     //to be replaced with trip nickname later
     fontFamily: fonts.secondry,
+    alignSelf: "center",
     fontSize: 25,
-    marginBottom: 25,
+    marginBottom: 5,
+    marginTop: 25,
   },
 
   submitButton: {
