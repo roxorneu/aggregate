@@ -46,6 +46,7 @@ export default function DrawerNavigation() {
         component={ChoosePathScreen}
         options={({ navigation }) => ({
           headerTitleAlign: "center",
+          //header: () => null,
           headerStyle: {
             backgroundColor: colors.secondary,
           },
@@ -78,6 +79,6 @@ export default function DrawerNavigation() {
           headerLeft: () => <BackButton navigation={navigation} />,
         })}
       />
-    </Drawer.Navigator>
+      </Drawer.Navigator>
   );
 }

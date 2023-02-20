@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import { store } from "./app/redux/store";
 
 import AppNavigator from "./app/navigation/AppNavigator";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const App = () => {
   LogBox.ignoreAllLogs();
@@ -27,7 +28,8 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate persistor={perStore}>
-        <AppNavigator />
+        <SafeAreaProvider>
+        <AppNavigator /></SafeAreaProvider>
       </PersistGate>
     </Provider>
   );
