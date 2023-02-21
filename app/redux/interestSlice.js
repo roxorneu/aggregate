@@ -32,6 +32,7 @@ const interestSlice = createSlice({
         state[viewerID] = arr;
       }
       return state;
+      // to do - remove from mongodb as well
     },
   },
 });
