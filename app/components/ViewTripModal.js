@@ -29,7 +29,12 @@ const ViewTripModal = (props) => {
   const dispatch = useDispatch();
 
   const interestedTripsObject = useSelector((state) => state.tripsList);
-  const interestedListForUser = interestedTripsObject[viewerID];
+
+  var interestedListForUser = [];
+
+  if (viewerID in interestedTripsObject) {
+    interestedListForUser = interestedTripsObject[viewerID];
+  }
 
   const isViewerInterested = () => {
     // if user has no saved interests, state object will return undefined list

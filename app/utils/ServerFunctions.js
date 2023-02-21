@@ -21,7 +21,7 @@ async function updateInterestAndNotification(
   const user = auth.currentUser;
 
   const viewerID = user.uid;
-  //console.log(viewerID);
+  //  console.log(viewerID);
 
   const message = {
     tripID: tripID,
@@ -35,7 +35,7 @@ async function updateInterestAndNotification(
   try {
     await axios.post(SERVER + TRIP_UPDATE_URL, message);
   } catch (err) {
-    console.log(err);
+    console.log("Here", err);
   }
 }
 
