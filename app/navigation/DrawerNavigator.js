@@ -12,6 +12,7 @@ import strings from "../config/strings";
 
 import BackButton from "../components/BackButton";
 import ProfileButton from "../components/ProfileButton";
+import BottomTabNavigator from "./BottomTabNavigator";
 
 // Choose Path Screen nests drawer into stack default stack navigator
 const Drawer = createDrawerNavigator();
@@ -74,11 +75,11 @@ export default function DrawerNavigation() {
 
       <Drawer.Screen
         name={strings.profileScreen}
-        component={ProfileScreen}
+        component={BottomTabNavigator}
         options={({ navigation }) => ({
           headerLeft: () => <BackButton navigation={navigation} />,
         })}
       />
-      </Drawer.Navigator>
+    </Drawer.Navigator>
   );
 }
